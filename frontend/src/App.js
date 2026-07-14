@@ -1,0 +1,69 @@
+import "@/App.css";
+import { Suspense, lazy, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { Toaster } from "sonner";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Products = lazy(() => import("@/pages/Products"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const DealerLocator = lazy(() => import("@/pages/DealerLocator"));
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+}
+
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#fcfdfa]">
+      <div className="w-10 h-10 rounded-full border-4 border-green-100 border-t-green-700 animate-spin"></div>
+    </div>
+  );
+}
+
+function AppShell() {
+  const { pathname } = useLocation();
+  // The editorial homepage ships its own floating nav (and, later, footer),
+  // so suppress the global chrome there while keeping it on every other page.
+  const isLanding = pathname === "/";
+
+  return (
+    <>
+      <ScrollToTop />
+      {!isLanding && <Navbar />}
+      <main className="min-h-screen">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/dealer-locator" element={<DealerLocator />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!isLanding && <Footer />}
+      <Toaster position="top-right" richColors />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <BrowserRouter>
+        <AppShell />
+      </BrowserRouter>
+    </LanguageProvider>
+  );
+}
+
+export default App;

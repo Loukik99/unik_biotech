@@ -1,0 +1,13 @@
+# Netlify deployment config for the Unik Biotech website.
+# The React app lives in the `frontend` subfolder, so Netlify builds from there.
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "build"
+
+# SPA fallback so client-side routes (/about, /products, ...) resolve on refresh.
+# (Mirrors frontend/public/_redirects, kept here as a safety net.)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

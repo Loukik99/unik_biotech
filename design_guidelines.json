@@ -1,0 +1,188 @@
+{
+  "identity": {
+    "name": "E1",
+    "mission": "Create a unique, fusion-driven agricultural brand identity for UNIK BIOTECH RESEARCH that blends scientific precision with organic warmth.",
+    "principles": [
+      "Fusion over Imitation: Mix Biotech Lab aesthetics with traditional Indian farming warmth.",
+      "Emotion First: Evoke 'Growth', 'Trust', and 'Abundance'.",
+      "Content is King: Every product card tells a yield-improvement story.",
+      "Zoom In: Macro shots of healthy cells/leaves vs wide drone shots of fields.",
+      "Negative Space: Allow the user to breathe, like a open field."
+    ]
+  },
+  "theme_strategy": {
+    "mode": "light",
+    "rationale": "Agriculture and nature inherently align with light, sun-drenched aesthetics. Dark mode is reserved for 'High-Tech/Precision Ag' dashboards if needed, but the primary marketing site must be bright and organic.",
+    "archetype": "ORGANIC & EARTHY (The 'Modern Harvest')",
+    "visual_mood": "Sunlight, Healthy Soil, Scientific Clarity, Vibrant Growth."
+  },
+  "typography": {
+    "primary_font": "Manrope",
+    "secondary_font": "Inter",
+    "marathi_font": "Noto Sans Devanagari",
+    "usage": {
+      "headings": "Manrope, font-bold or font-extrabold, tight tracking (-0.02em). Expresses modern reliability.",
+      "body": "Inter, font-normal, relaxed leading (1.6). Ensures maximum readability for detailed product info.",
+      "accents": "Manrope, uppercase, wide tracking (0.1em) for labels (e.g., 'ISO 9001:2008').",
+      "marathi": "Noto Sans Devanagari for all Marathi text to ensure legibility and cultural connection."
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl font-bold tracking-tight",
+      "h2": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-semibold",
+      "p": "text-base md:text-lg text-muted-foreground"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "name": "Unik Green",
+        "value": "#166534",
+        "tailwind": "bg-green-800",
+        "usage": "Primary buttons, key headings, active states."
+      },
+      "secondary": {
+        "name": "Harvest Gold",
+        "value": "#f59e0b",
+        "tailwind": "bg-amber-500",
+        "usage": "Call to actions (secondary), highlights, 'Certified' badges."
+      },
+      "accent": {
+        "name": "Earth Brown",
+        "value": "#78350f",
+        "tailwind": "bg-amber-900",
+        "usage": "Footers, dark organic backgrounds."
+      },
+      "background": {
+        "name": "Morning Mist",
+        "value": "#fcfdfa",
+        "tailwind": "bg-[#fcfdfa]",
+        "usage": "Main page background. Avoid pure white #ffffff."
+      },
+      "surface": {
+        "name": "Clean White",
+        "value": "#ffffff",
+        "tailwind": "bg-white",
+        "usage": "Cards, input fields, modals."
+      },
+      "text": {
+        "primary": "#0f172a",
+        "secondary": "#475569",
+        "muted": "#94a3b8"
+      }
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(to bottom, rgba(22, 101, 52, 0.1), rgba(252, 253, 250, 1))",
+      "card_hover": "linear-gradient(135deg, rgba(22, 197, 94, 0.1), transparent)"
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "spacing": "Generous. Use p-8 to p-16 for section padding.",
+    "grids": {
+      "bento_products": "grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]",
+      "features": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8",
+      "dealer_locator": "grid grid-cols-1 lg:grid-cols-3 gap-8 h-[600px]"
+    },
+    "alignment": "Left align text for readability. Center align Hero headlines for impact."
+  },
+  "components": {
+    "buttons": {
+      "style": "rounded-full font-semibold transition-all duration-300",
+      "primary": "bg-green-800 text-white hover:bg-green-700 hover:scale-105 shadow-lg shadow-green-900/20",
+      "secondary": "bg-amber-500 text-white hover:bg-amber-600 hover:shadow-lg shadow-amber-500/20",
+      "outline": "border-2 border-green-800 text-green-800 hover:bg-green-50"
+    },
+    "cards": {
+      "style": "bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 group hover:shadow-xl hover:border-green-200 hover:-translate-y-1",
+      "product_card": "Relative positioning. Image takes top 50%. Content bottom 50%. Hover reveals 'Enquire' button."
+    },
+    "inputs": {
+      "style": "bg-gray-50 border-gray-200 focus:ring-2 focus:ring-green-500 rounded-lg h-12 px-4"
+    },
+    "navigation": {
+      "style": "fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 border-b border-gray-100/50 supports-[backdrop-filter]:bg-white/60"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Subtle noise overlay (opacity 0.02) on solid backgrounds to reduce digital flatness.",
+    "shadows": "Colored shadows. Use shadow-green-900/10 instead of pure black shadows.",
+    "borders": "1px solid #e2e8f0. Active borders: #22c55e.",
+    "icons": "Lucide React icons. Use distinct weights (stroke-width={1.5}) for a technical feel."
+  },
+  "motion": {
+    "philosophy": "Organic Growth. Elements should 'sprout' or 'unfold' rather than just slide.",
+    "entrance": "fade-in-up (opacity 0 -> 1, y 20px -> 0px)",
+    "hover": "scale-105 for images. Text color shift for links.",
+    "scroll": "Parallax effect on Hero Background. Staggered reveal for Product Grids."
+  },
+  "images": {
+    "hero": [
+      {
+        "url": "https://images.unsplash.com/photo-1761486348798-9754781710f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHw0fHxoZWFsdGh5JTIwZ3JlZW4lMjBjcm9wJTIwY2xvc2UlMjB1cCUyMHN1bmxpZ2h0fGVufDB8fHx8MTc3MTQ3NjgwMHww&ixlib=rb-4.1.0&q=85",
+        "alt": "Sunlight shining through bright green leaves - Hero Background",
+        "category": "hero"
+      },
+      {
+         "url": "https://images.unsplash.com/photo-1594179131702-112ff2a880e4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBmYXJtZXIlMjBmaWVsZCUyMGFncmljdWx0dXJlJTIwaGFwcHl8ZW58MHx8fHwxNzcxNDc2Nzk2fDA&ixlib=rb-4.1.0&q=85",
+         "alt": "Happy Indian Farmer in field - Trust Section",
+         "category": "hero_trust"
+      }
+    ],
+    "about": [
+      {
+        "url": "https://images.unsplash.com/photo-1758206523826-a65d4cf070aa?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBwbGFudCUyMGJpb3RlY2hub2xvZ3klMjBsYWJvcmF0b3J5JTIwcmVzZWFyY2h8ZW58MHx8fHwxNzcxNDc2Nzk4fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Scientist in lab - Research/Quality",
+        "category": "about_research"
+      },
+       {
+         "url": "https://images.pexels.com/photos/8851412/pexels-photo-8851412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+         "alt": "Scientist examining plant - Biotech Expertise",
+         "category": "about_expertise"
+       }
+    ],
+    "products": [
+      {
+        "url": "https://images.unsplash.com/photo-1763856957026-a74ab4f05891?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxzb2lsJTIwaW4lMjBoYW5kcyUyMGdyb3dpbmclMjBwbGFudHxlbnwwfHx8fDE3NzE0NzY4MDJ8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Hands planting seedling - Soil Conditioners",
+        "category": "product_soil"
+      },
+      {
+        "url": "https://images.pexels.com/photos/14208681/pexels-photo-14208681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Lush green lettuce - Biostimulants",
+        "category": "product_growth"
+      },
+       {
+        "url": "https://images.unsplash.com/photo-1567673371431-a5fec0fc6ab6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHwzfHxhZ3JpY3VsdHVyYWwlMjBkcm9uZSUyMHNwcmF5aW5nJTIwZmllbGQlMjB2aWV3fGVufDB8fHx8MTc3MTQ3Njc5N3ww&ixlib=rb-4.1.0&q=85",
+        "alt": "Drone spraying field - Modern Tech/Insecticides",
+        "category": "product_tech"
+      }
+    ],
+     "general": [
+      {
+        "url": "https://images.pexels.com/photos/29912210/pexels-photo-29912210.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "alt": "Elderly farmer - Tradition/Service",
+        "category": "community"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install 'lucide-react' and 'framer-motion' immediately.",
+    "Install 'react-i18next' or similar for Bilingual support logic.",
+    "Use 'Manrope' from Google Fonts. Add import to index.css: @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');",
+    "Create a 'LanguageSwitcher' component that toggles a context state.",
+    "Ensure all forms (Contact, Dealer Inquiry) use Shadcn form components with Zod validation.",
+    "The 'Dealer Locator' should ideally use a map library (Leaflet/React-Leaflet) or a well-styled list if API keys are missing. Mock the map visually if needed.",
+    "Products Page: Use a filterable Bento Grid (Category Filter buttons at top).",
+    "Do not use generic Lorem Ipsum where possible—use context-aware placeholders (e.g., 'Increases yield by 20%', 'Contains 98% Humic Acid')."
+  ],
+  "UNIVERSAL_GUIDELINES": [
+    "Do not use gradients for text.",
+    "Avoid 'Inter' for headings. Use Manrope.",
+    "Use 24px+ padding for containers.",
+    "Interactive elements must have hover states.",
+    "Add 'data-testid' to all buttons and inputs.",
+    "Use 'sonner' for toasts.",
+    "Bilingual: Ensure text containers can expand for Marathi text (which often takes more vertical space)."
+  ]
+}
