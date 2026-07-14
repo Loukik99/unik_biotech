@@ -46,7 +46,7 @@ export default function Footer() {
   const journey = t("footer", "journey");
 
   return (
-    <footer className="relative isolate flex min-h-[520px] w-full flex-col overflow-hidden text-white lg:min-h-[600px]">
+    <footer className="relative isolate flex min-h-[520px] w-full flex-col overflow-hidden overflow-x-hidden text-white lg:min-h-[600px]">
       {/* Background — full-bleed tea plantation with a slow Ken Burns drift */}
       <img
         src={`${BASE}-1600.webp`}
@@ -69,7 +69,7 @@ export default function Footer() {
         <div
           ref={panelRef}
           className={cn(
-            "relative z-10 mx-auto grid w-[85%] max-w-[1400px] gap-10 rounded-[32px] border border-white/15 bg-white/[0.08] p-8 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] backdrop-blur-[18px] sm:p-12 lg:grid-cols-12 lg:gap-8 lg:p-14",
+            "relative z-10 mx-auto grid w-full max-w-[1400px] gap-10 rounded-[32px] border border-white/15 bg-white/[0.08] p-5 sm:p-8 sm:w-[90%] md:p-10 lg:w-[85%] lg:grid-cols-12 lg:gap-8 lg:p-14 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] backdrop-blur-[18px]",
             revealClasses("fade-up", panelRevealed)
           )}
         >
@@ -78,9 +78,9 @@ export default function Footer() {
               <img
                 src="/official-logo.jpg"
                 alt="Unik Biotech Logo"
-                className="h-20 w-auto object-contain object-center sm:h-24"
+                className="h-16 w-auto object-contain object-center sm:h-20 md:h-24"
               />
-              <p className={cn("mt-6 max-w-sm text-[15px] leading-7 text-white/75", mr)}>
+              <p className={cn("mt-6 max-w-sm text-[15px] leading-7 text-white/75 break-words", mr)}>
                 {t("footer", "desc")}
               </p>
 
@@ -90,16 +90,16 @@ export default function Footer() {
                 </p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="group/contact flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
+                  className="group/contact flex items-start gap-3 text-[15px] text-white/80 transition-colors hover:text-white break-all"
                 >
-                  <Mail className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white" strokeWidth={1.75} />
-                  {CONTACT_EMAIL}
+                  <Mail className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white mt-1 shrink-0" strokeWidth={1.75} />
+                  <span>{CONTACT_EMAIL}</span>
                 </a>
                 <a
                   href={`tel:${CONTACT_PHONE_TEL}`}
                   className="group/contact flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
                 >
-                  <Phone className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white" strokeWidth={1.75} />
+                  <Phone className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white shrink-0" strokeWidth={1.75} />
                   {CONTACT_PHONE_DISPLAY}
                 </a>
               </div>
@@ -107,7 +107,7 @@ export default function Footer() {
               <Link
                 to="/contact"
                 className={cn(
-                  "group/btn mt-8 inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-brand-green motion-reduce:transform-none",
+                  "group/btn mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-brand-green motion-reduce:transform-none sm:w-auto",
                   mr
                 )}
               >
@@ -148,10 +148,10 @@ export default function Footer() {
                       i !== 0 && "border-t border-white/10"
                     )}
                   >
-                    <span className="text-xl font-bold tracking-tight text-white">
+                    <span className="text-xl font-bold tracking-tight text-white shrink-0">
                       {item.value}
                     </span>
-                    <span className={cn("text-sm text-white/60", mr)}>{item.label}</span>
+                    <span className={cn("text-sm text-white/60 break-words", mr)}>{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -159,7 +159,7 @@ export default function Footer() {
           </div>
 
         {/* Bottom bar */}
-        <div className="relative z-10 mx-auto mt-10 flex w-[85%] max-w-[1400px] flex-col items-center gap-3 border-t border-farm-olive/40 pt-6 text-center sm:flex-row sm:justify-center sm:text-left">
+        <div className="relative z-10 mx-auto mt-10 flex w-full max-w-[1400px] flex-col items-center gap-3 border-t border-farm-olive/40 pt-6 text-center sm:w-[90%] sm:flex-row sm:justify-center sm:text-left lg:w-[85%]">
           <p className={cn("text-xs text-white/60", mr)}>
             © {year} Unik Biotech Research. {t("footer", "rights")}
           </p>
