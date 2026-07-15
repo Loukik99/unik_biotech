@@ -59,7 +59,7 @@ export default function Contact() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Unik Biotech Research",
-    "image": "https://unikbiotechresearch.com/official-logo.jpg",
+    "image": "https://unikbiotechresearch.com/official-logo.png",
     "url": "https://unikbiotechresearch.com",
     "telephone": "+91-7666272741",
     "email": "Sales@unikbiotechresearch.com",

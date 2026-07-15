@@ -19,7 +19,7 @@ export default function Home() {
     "name": "Unik Biotech Research",
     "alternateName": "Unik Biotech Research",
     "url": "https://unikbiotechresearch.com",
-    "logo": "https://unikbiotechresearch.com/official-logo.jpg",
+    "logo": "https://unikbiotechresearch.com/official-logo.png",
     "foundingDate": "2005",
     "founder": {
       "@type": "Person",

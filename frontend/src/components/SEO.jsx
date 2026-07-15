@@ -5,7 +5,7 @@ const SEO = ({
     description,
     keywords,
     url = "https://unikbiotechresearch.com",
-    image = "https://unikbiotechresearch.com/official-logo.jpg",
+    image = "https://unikbiotechresearch.com/official-logo.png",
     type = "website",
     schema,
     faqSchema,
