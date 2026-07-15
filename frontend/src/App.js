@@ -1,6 +1,7 @@
 import "@/App.css";
 import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { MotionConfig } from "motion/react";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
@@ -59,9 +60,14 @@ function AppShell() {
 function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
-        <AppShell />
-      </BrowserRouter>
+      {/* reducedMotion="user" makes every Framer Motion animation (reveals,
+          hero, etc.) automatically drop transforms and only cross-fade when the
+          visitor has requested reduced motion. */}
+      <MotionConfig reducedMotion="user">
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
+      </MotionConfig>
     </LanguageProvider>
   );
 }

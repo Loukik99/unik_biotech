@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-
-const VIEWPORT = { once: true, amount: 0.2 };
-const EASE = [0.22, 1, 0.36, 1];
+import { SlideReveal } from "@/components/animations/SlideReveal";
 
 // Flagship products — real packaging artwork from /public/products.
 // Presented as equal-size cards, matching the reference composition.
@@ -31,70 +28,40 @@ const PRODUCTS = [
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay } }),
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-};
-
 export default function WhatWeOffer() {
   return (
     <section className="relative w-full overflow-hidden bg-farm-cream py-24 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         {/* Header — heading left, description right (editorial) */}
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <SlideReveal
+          direction="left"
+          className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
+        >
           <div>
-            <motion.p
-              variants={fadeUp}
-              custom={0}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
-              className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep"
-            >
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep">
               Our Products
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              custom={0.08}
-              initial="hidden"
-              whileInView="show"
-              viewport={VIEWPORT}
-              className="mt-5 font-heading text-[2.1rem] font-semibold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]"
-            >
+            </p>
+            <h2 className="mt-5 font-heading text-[2.1rem] font-semibold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]">
               What We <span className="text-farm-forest">Offer</span>
-            </motion.h2>
+            </h2>
           </div>
-          <motion.p
-            variants={fadeUp}
-            custom={0.15}
-            initial="hidden"
-            whileInView="show"
-            viewport={VIEWPORT}
-            className="max-w-sm text-[15px] leading-relaxed text-farm-ink/65"
-          >
+          <p className="max-w-sm text-[15px] leading-relaxed text-farm-ink/65">
             Explore a selection of our trusted agricultural solutions developed to improve crop
             health, enhance productivity, and support sustainable farming practices.
-          </motion.p>
-        </div>
+          </p>
+        </SlideReveal>
 
-        {/* Products — three equal-size editorial cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
-          variants={{ show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } }}
-          className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8"
-        >
-          {PRODUCTS.map((p) => (
-            <motion.div key={p.name} variants={cardVariants}>
+        {/* Products — three equal-size editorial cards, each alternating direction */}
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8">
+          {PRODUCTS.map((p, index) => (
+            <SlideReveal
+              key={p.name}
+              direction={index % 2 === 0 ? "left" : "right"}
+              className="h-full"
+            >
               <Link
                 to="/products"
-                className="group flex h-full flex-col rounded-[24px] border border-farm-ink/[0.07] bg-farm-beige/35 p-6 transition-shadow duration-300 hover:shadow-[0_26px_60px_-40px_rgba(27,26,22,0.55)] sm:p-7"
+                className="group flex h-full flex-col rounded-[24px] border border-farm-ink/[0.07] bg-farm-beige/35 p-6 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_30px_64px_-38px_rgba(27,26,22,0.6)] sm:p-7"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-heading text-sm font-semibold text-farm-ink/40">{p.no}</span>
@@ -120,19 +87,12 @@ export default function WhatWeOffer() {
                   />
                 </div>
               </Link>
-            </motion.div>
+            </SlideReveal>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA */}
-        <motion.div
-          variants={fadeUp}
-          custom={0}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
-          className="mt-16 flex justify-center lg:mt-20"
-        >
+        <SlideReveal direction="right" className="mt-16 flex justify-center lg:mt-20">
           <Link
             to="/products"
             className="group inline-flex items-center gap-2 rounded-full bg-farm-forest px-7 py-3.5 text-[14px] font-semibold text-farm-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-forestDeep"
@@ -140,7 +100,7 @@ export default function WhatWeOffer() {
             Explore More Products
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </SlideReveal>
       </div>
     </section>
   );

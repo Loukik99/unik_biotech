@@ -96,7 +96,7 @@ export default function About() {
           <div ref={imgRef} className="relative overflow-hidden rounded-[32px] shadow-soft">
             <img
               src={ABOUT_IMAGE}
-              alt="Sunrise over healthy crop rows cultivated with UNIK Biotech inputs"
+              alt="Sunrise over healthy crop rows cultivated with Unik Biotech Research inputs"
               loading="lazy"
               decoding="async"
               className={cn(

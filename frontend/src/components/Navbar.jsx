@@ -65,8 +65,8 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex h-12 items-center gap-2 group shrink-0" data-testid="navbar-logo">
             <img
-              src="/official-logo.jpg"
-              alt="Unik Biotech Logo"
+              src="/official-logo.png"
+              alt="Unik Biotech Research Logo"
               className={`h-full w-auto object-contain object-center transition-all duration-300 group-hover:scale-105 ${isScrolled ? "max-h-10 sm:max-h-11" : "max-h-11 sm:max-h-12"}`}
             />
           </Link>
@@ -130,7 +130,7 @@ export default function Navbar() {
 
             {/* Call CTA (desktop) */}
             <a
-              href="tel:08380017593"
+              href="tel:+917666272741"
               data-testid="navbar-cta"
               className={`hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 ${isScrolled
                 ? "bg-green-800 text-white hover:bg-green-700 shadow-md shadow-green-900/20"
@@ -138,7 +138,7 @@ export default function Navbar() {
                 }`}
             >
               <Phone className="w-4 h-4" />
-              <span className="hidden lg:inline">08380017593</span>
+              <span className="hidden lg:inline">+91 7666272741</span>
               <span className="lg:hidden">{t("nav", "contact")}</span>
             </a>
 
@@ -176,11 +176,11 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="tel:08380017593"
+            href="tel:+917666272741"
             className="flex items-center justify-center gap-2 mt-3 px-4 py-3.5 rounded-xl bg-green-800 text-white font-semibold hover:bg-green-700 transition-colors"
           >
             <Phone className="w-4 h-4" />
-            08380017593
+            +91 7666272741
           </a>
         </div>
       </div>

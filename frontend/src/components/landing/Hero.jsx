@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { ArrowRight, BadgeCheck } from "lucide-react";
 import FarmImage from "@/components/landing/FarmImage";
 
-const HEADLINE = ["Unik", "Biotechnology", "Research"];
+const HEADLINE = ["Unik", "Biotech", "Research"];
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -124,6 +124,17 @@ export default function Hero() {
               </span>
             ))}
           </motion.h1>
+
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 12 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
+            }}
+            className="mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/85 sm:text-base lg:text-lg"
+          >
+            Trusted by farmers across India. Delivering quality agricultural inputs
+            for better yields, healthier soil, and sustainable farming since 2005.
+          </motion.p>
 
           <motion.div
             variants={{

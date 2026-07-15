@@ -28,7 +28,7 @@ const SEO = ({
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Unik Biotech Research",
-        "alternateName": ["Unik Biotech", "UNIK BIOTECH RESEARCH"],
+        "alternateName": ["Unik Biotech Research"],
         "url": "https://unikbiotechresearch.com",
     };
 

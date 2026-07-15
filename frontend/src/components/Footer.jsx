@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLang } from "@/context/LanguageContext";
-import { useReveal } from "@/components/hooks/useReveal";
-import { revealClasses } from "@/components/animations/transitions";
+import { Reveal, RevealItem } from "@/components/animations/Reveal";
 
 const BASE = "/unik/tea-harvest-path";
-const CONTACT_EMAIL = "enquiries@unikbiotechresearch.com";
-const CONTACT_PHONE_DISPLAY = "+91 83800 17593";
-const CONTACT_PHONE_TEL = "+918380017593";
+const CONTACT_EMAIL = "Sales@unikbiotechresearch.com";
+const CONTACT_PHONE_DISPLAY = "+91 7666272741";
+const CONTACT_PHONE_TEL = "+917666272741";
 
 /** Quick link with a smooth left-to-right underline animation on hover. */
 function QuickLink({ to, children, mr }) {
@@ -16,7 +15,7 @@ function QuickLink({ to, children, mr }) {
     <Link
       to={to}
       className={cn(
-        "group/link relative inline-block py-1 text-[15px] text-white/75 transition-colors duration-300 hover:text-white",
+        "group/link relative inline-block py-1 text-[15px] text-white/75 transition-[color,transform] duration-300 ease-out hover:translate-x-1 hover:text-white",
         mr
       )}
     >
@@ -33,7 +32,6 @@ export default function Footer() {
   const { t, lang } = useLang();
   const mr = lang === "mr" ? "font-marathi" : "";
   const year = new Date().getFullYear();
-  const [panelRef, panelRevealed] = useReveal();
 
   const quickLinks = [
     { to: "/", label: t("nav", "home") },
@@ -42,8 +40,6 @@ export default function Footer() {
     { to: "/dealer-locator", label: t("nav", "dealerLocator") },
     { to: "/contact", label: t("nav", "contact") },
   ];
-
-  const journey = t("footer", "journey");
 
   return (
     <footer className="relative isolate flex min-h-[520px] w-full flex-col overflow-hidden overflow-x-hidden text-white lg:min-h-[600px]">
@@ -65,19 +61,15 @@ export default function Footer() {
 
       {/* Foreground */}
       <div className="relative z-10 flex flex-1 flex-col justify-end px-4 pb-10 pt-16 sm:px-6 lg:px-8">
-        {/* Glass panel */}
-        <div
-          ref={panelRef}
-          className={cn(
-            "relative z-10 mx-auto grid w-full max-w-[1400px] gap-10 rounded-[32px] border border-white/15 bg-white/[0.08] p-5 sm:p-8 sm:w-[90%] md:p-10 lg:w-[85%] lg:grid-cols-12 lg:gap-8 lg:p-14 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] backdrop-blur-[18px]",
-            revealClasses("fade-up", panelRevealed)
-          )}
+        {/* Glass panel — columns reveal with a subtle stagger */}
+        <Reveal
+          className="relative z-10 mx-auto grid w-full max-w-[1400px] gap-10 rounded-[32px] border border-white/15 bg-white/[0.08] p-5 sm:p-8 sm:w-[90%] md:p-10 lg:w-[85%] lg:grid-cols-12 lg:gap-8 lg:p-14 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] backdrop-blur-[18px]"
         >
             {/* LEFT — brand + contact */}
-            <div className="lg:col-span-5 lg:pr-8">
+            <RevealItem className="lg:col-span-7 lg:pr-8">
               <img
-                src="/official-logo.jpg"
-                alt="Unik Biotech Logo"
+                src="/official-logo.png"
+                alt="Unik Biotech Research Logo"
                 className="h-16 w-auto object-contain object-center sm:h-20 md:h-24"
               />
               <p className={cn("mt-6 max-w-sm text-[15px] leading-7 text-white/75 break-words", mr)}>
@@ -92,14 +84,14 @@ export default function Footer() {
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="group/contact flex items-start gap-3 text-[15px] text-white/80 transition-colors hover:text-white break-all"
                 >
-                  <Mail className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white mt-1 shrink-0" strokeWidth={1.75} />
+                  <Mail className="h-4 w-4 text-white/50 transition-[color,transform] duration-300 ease-out group-hover/contact:scale-110 group-hover/contact:text-white mt-1 shrink-0" strokeWidth={1.75} />
                   <span>{CONTACT_EMAIL}</span>
                 </a>
                 <a
                   href={`tel:${CONTACT_PHONE_TEL}`}
                   className="group/contact flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
                 >
-                  <Phone className="h-4 w-4 text-white/50 transition-colors group-hover/contact:text-white shrink-0" strokeWidth={1.75} />
+                  <Phone className="h-4 w-4 text-white/50 transition-[color,transform] duration-300 ease-out group-hover/contact:scale-110 group-hover/contact:text-white shrink-0" strokeWidth={1.75} />
                   {CONTACT_PHONE_DISPLAY}
                 </a>
               </div>
@@ -118,10 +110,10 @@ export default function Footer() {
                   aria-hidden="true"
                 />
               </Link>
-            </div>
+            </RevealItem>
 
-            {/* CENTER — quick links */}
-            <div className="lg:col-span-3">
+            {/* RIGHT — quick links */}
+            <RevealItem className="lg:col-span-5">
               <p className={cn("text-xs font-semibold uppercase tracking-[0.2em] text-white/50", mr)}>
                 {t("footer", "quickLinks")}
               </p>
@@ -132,31 +124,8 @@ export default function Footer() {
                   </QuickLink>
                 ))}
               </nav>
-            </div>
-
-            {/* RIGHT — our journey */}
-            <div className="lg:col-span-4">
-              <p className={cn("text-xs font-semibold uppercase tracking-[0.2em] text-white/50", mr)}>
-                {t("footer", "journeyTitle")}
-              </p>
-              <div className="mt-4">
-                {(Array.isArray(journey) ? journey : []).map((item, i) => (
-                  <div
-                    key={item.label}
-                    className={cn(
-                      "flex items-baseline gap-3 py-4",
-                      i !== 0 && "border-t border-white/10"
-                    )}
-                  >
-                    <span className="text-xl font-bold tracking-tight text-white shrink-0">
-                      {item.value}
-                    </span>
-                    <span className={cn("text-sm text-white/60 break-words", mr)}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            </RevealItem>
+          </Reveal>
 
         {/* Bottom bar */}
         <div className="relative z-10 mx-auto mt-10 flex w-full max-w-[1400px] flex-col items-center gap-3 border-t border-farm-olive/40 pt-6 text-center sm:w-[90%] sm:flex-row sm:justify-center sm:text-left lg:w-[85%]">

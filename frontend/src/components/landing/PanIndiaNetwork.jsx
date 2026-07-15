@@ -1,18 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion } from "motion/react";
-import { ArrowRight, Handshake, MapPin, ShieldCheck, Sprout, UsersRound } from "lucide-react";
-
-const VIEWPORT = { once: true, amount: 0.25 };
-const EASE = [0.22, 1, 0.36, 1];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE, delay },
-  }),
-};
+import { ArrowRight, Handshake, ShieldCheck, Sprout, UsersRound } from "lucide-react";
+import { SlideReveal } from "@/components/animations/SlideReveal";
 
 const features = [
   {
@@ -58,7 +46,7 @@ function FeatureItem({ feature, isLast }) {
       {isLast && (
         <Link
           to="/dealer-locator"
-          className="group inline-flex items-center gap-2 rounded-full bg-farm-forest px-5 py-3 text-[13px] font-semibold text-farm-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-forestDeep"
+          className="group mt-1 inline-flex w-fit items-center gap-2 self-start rounded-full bg-farm-forest px-7 py-3.5 text-sm font-semibold text-farm-cream shadow-lg shadow-farm-forest/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-forestDeep"
         >
           Become a Dealer
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -69,13 +57,18 @@ function FeatureItem({ feature, isLast }) {
 }
 
 function IndiaMap() {
+  // Embedded as an <object> (not <img>) so the SVG stays interactive: each pin
+  // reveals its label and animates on hover. Rendering is visually identical.
   return (
-    <img
-      src="/india-network-map.svg"
-      alt="India distribution network map"
-      className="relative z-10 h-auto w-full max-w-[520px] sm:max-w-[560px]"
-      draggable="false"
-    />
+    <object
+      type="image/svg+xml"
+      data="/india-network-map.svg"
+      aria-label="India distribution network map"
+      className="relative z-10 block h-auto w-full max-w-[520px] sm:max-w-[560px]"
+      style={{ aspectRatio: "620 / 720" }}
+    >
+      India distribution network map
+    </object>
   );
 }
 
@@ -84,47 +77,41 @@ export default function PanIndiaNetwork() {
     <section className="relative w-full overflow-hidden bg-white py-24 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-          <motion.div
-            variants={fadeUp}
-            custom={0}
-            initial="hidden"
-            whileInView="show"
-            viewport={VIEWPORT}
-            className="lg:col-span-5 lg:pr-6"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep">
-              Pan India Network
-            </p>
+          <div className="lg:col-span-5 lg:pr-6">
+            <SlideReveal direction="left">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep">
+                Pan India Network
+              </p>
 
-            <h2 className="mt-6 font-heading text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]">
-              Strong Network.
-              <br />
-              <span className="text-farm-forest">Stronger Together.</span>
-            </h2>
+              <h2 className="mt-6 font-heading text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]">
+                Strong Network.
+                <br />
+                <span className="text-farm-forest">Stronger Together.</span>
+              </h2>
 
-            <p className="mt-7 max-w-md text-[15px] leading-relaxed text-farm-ink/70 sm:text-base">
-              Unik Biotech is building a trusted nationwide dealer network that connects
-              quality agricultural solutions with farmers through dependable local support.
-            </p>
+              <p className="mt-7 max-w-md text-[15px] leading-relaxed text-farm-ink/70 sm:text-base">
+                Unik Biotech Research is building a trusted nationwide dealer network that connects
+                quality agricultural solutions with farmers through dependable local support.
+              </p>
+            </SlideReveal>
 
+            {/* Feature list — each row alternates its entrance direction */}
             <div className="mt-9 max-w-md">
               {features.map((feature, index) => (
-                <FeatureItem
+                <SlideReveal
                   key={feature.title}
-                  feature={feature}
-                  isLast={index === features.length - 1}
-                />
+                  direction={index % 2 === 0 ? "left" : "right"}
+                >
+                  <FeatureItem
+                    feature={feature}
+                    isLast={index === features.length - 1}
+                  />
+                </SlideReveal>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={VIEWPORT}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="lg:col-span-7"
-          >
+          <SlideReveal direction="right" className="lg:col-span-7">
             <div className="relative mx-auto max-w-[680px]">
               <span
                 aria-hidden="true"
@@ -143,7 +130,7 @@ export default function PanIndiaNetwork() {
                 <IndiaMap />
               </div>
             </div>
-          </motion.div>
+          </SlideReveal>
         </div>
       </div>
     </section>

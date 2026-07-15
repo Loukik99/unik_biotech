@@ -31,7 +31,7 @@ const OVERLAY_GREEN =
   "radial-gradient(100% 95% at 50% 0%, rgba(93,187,99,.24) 0%, rgba(93,187,99,0) 58%)";
 
 const TIMELINE = [
-  { year: "2005", title: "Founded", desc: "UNIK BIOTECH RESEARCH was established in Pimpalgaon Baswant, Nashik with a mission to serve farmers." },
+  { year: "2005", title: "Founded", desc: "Unik Biotech Research was established in Pimpalgaon Baswant, Nashik with a mission to serve farmers." },
   { year: "2008", title: "ISO 9001:2008 Certified", desc: "Achieved ISO 9001:2008 certification, reaffirming commitment to quality." },
   { year: "2012", title: "Product Range Expansion", desc: "Expanded to 30+ products including herbal insecticides and biofertilizers." },
   { year: "2020", title: "100+ Products Milestone", desc: "Reached 100+ products serving thousands of farmers across Maharashtra." },
@@ -92,7 +92,7 @@ export default function About() {
       <SEO
         title="About Us — Our History, Mission & Vision"
         description="Unik Biotech Research, established in 2005 in Nashik, Maharashtra, is an ISO 9001:2008 certified manufacturer of organic fertilizers and biostimulants. Learn about our 20+ year journey, mission, vision, and commitment to Indian agriculture."
-        keywords="about Unik Biotech, agriculture company Nashik, ISO certified fertilizer manufacturer, Vilas R. Damre, Unik Biotech history, Pimpalgaon Baswant, agricultural inputs manufacturer India, organic farming company"
+        keywords="about Unik Biotech Research, agriculture company Nashik, ISO certified fertilizer manufacturer, Vilas R. Damre, Unik Biotech Research history, Pimpalgaon Baswant, agricultural inputs manufacturer India, organic farming company"
         url="https://unikbiotechresearch.com/about"
         lang={lang}
         faqSchema={aboutFAQs}

@@ -65,7 +65,7 @@ Since this is a Single Page Application using React Router, you will need to add
 
 Forms in this application are securely routed through [Formsubmit.co](https://formsubmit.co/). 
 
-The current configuration sends emails to `enquiries@unikbiotechresearch.com`. If you want to change the receiver email, modify the `fetch` endpoints in:
+The current configuration sends emails to `Sales@unikbiotechresearch.com`. If you want to change the receiver email, modify the `fetch` endpoints in:
 - `src/pages/Contact.jsx`
 - `src/pages/DealerLocator.jsx`
 

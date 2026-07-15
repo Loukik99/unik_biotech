@@ -76,17 +76,14 @@ export default function LandingNav() {
             : "border-white/15 bg-black/25 py-2.5 shadow-[0_16px_50px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
         }`}
       >
-        {/* Logo — official Unik Biotech lockup. A warm-cream chip keeps the
-            dark artwork legible over the hero; it dissolves once the nav turns cream. */}
+        {/* Logo — official Unik Biotech Research lockup, transparent PNG with no wrapper
+            chip so it blends into the navbar on both the dark hero and the cream
+            scrolled state. */}
         <Link to="/" className="group flex shrink-0 items-center" aria-label="Unik Biotech Research — home">
-          <span
-            className={`flex h-11 items-center rounded-xl transition-all duration-500 ${
-              scrolled ? "px-0 py-0" : "bg-farm-cream/95 px-2.5 py-1.5 shadow-sm"
-            }`}
-          >
+          <span className="flex h-11 items-center">
             <img
-              src="/official-logo.jpg"
-              alt="Unik Biotech Logo"
+              src="/official-logo.png"
+              alt="Unik Biotech Research Logo"
               className="h-full max-h-8 w-auto object-contain object-center sm:max-h-9"
               draggable="false"
             />

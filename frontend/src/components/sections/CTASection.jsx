@@ -9,8 +9,8 @@ import Section from "@/components/common/Section";
 const CTA_IMAGE =
   "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80";
 
-const PHONE = "+918380017593";
-const WHATSAPP = "https://wa.me/918380017593";
+const PHONE = "+917666272741";
+const WHATSAPP = "https://wa.me/917666272741";
 
 /** Official WhatsApp glyph (lucide has no brand icon). */
 function WhatsAppIcon({ className }) {

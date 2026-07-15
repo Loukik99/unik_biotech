@@ -11,7 +11,7 @@ import { prefersReducedMotion } from "@/components/animations/motion";
  * @param {string} [options.rootMargin="0px 0px -10% 0px"]
  * @param {boolean} [options.once=true]  Stop observing after first reveal.
  */
-export function useReveal({ threshold = 0.15, rootMargin = "0px 0px -10% 0px", once = true } = {}) {
+export function useReveal({ threshold = 0.2, rootMargin = "0px 0px -10% 0px", once = true } = {}) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 

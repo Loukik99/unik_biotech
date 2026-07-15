@@ -1,24 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { motion } from "motion/react";
 import { Search, X, ChevronRight, Package, Droplets, Layers, CheckCircle } from "lucide-react";
 import { useLang } from "@/context/LanguageContext";
 import { PRODUCTS, PRODUCT_CATEGORIES } from "@/data/products";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ProductImage from "@/components/common/ProductImage";
 import SEO from "@/components/SEO";
-
-function useReveal() {
-  const ref = useRef(null);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) e.target.classList.add("visible"); },
-      { threshold: 0.05 }
-    );
-    const el = ref.current;
-    if (el) obs.observe(el);
-    return () => { if (el) obs.unobserve(el); };
-  }, []);
-  return ref;
-}
 
 function ProductDetailDialog({ product, open, onClose }) {
   const { t } = useLang();
@@ -105,7 +92,7 @@ function ProductDetailDialog({ product, open, onClose }) {
             </div>
           )}
           <a
-            href="tel:08380017593"
+            href="tel:+917666272741"
             data-testid="product-enquire-btn"
             className="block w-full text-center py-3.5 rounded-full bg-green-800 text-white font-semibold hover:bg-green-700 transition-colors"
           >
@@ -122,7 +109,6 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
-  const gridRef = useReveal();
 
   const filtered = PRODUCTS.filter((p) => {
     const matchCat = activeCategory === "all" || p.category === activeCategory;
@@ -160,20 +146,20 @@ export default function Products() {
 
   const productFAQs = [
     {
-      question: "What are the best organic fertilizers from Unik Biotech?",
-      answer: "Unik Biotech's top organic fertilizers include AMINORICH (80% amino acids with 18 types), AGROMIC RICH (potassium humate with 71-72% humic acid), UNISEARICH (100% organic seaweed extract from Ascophyllum nodosum), and BROUN GOLD (80% fulvic acid). All are designed for sustainable, high-yield farming."
+      question: "What are the best organic fertilizers from Unik Biotech Research?",
+      answer: "Unik Biotech Research's top organic fertilizers include AMINORICH (80% amino acids with 18 types), AGROMIC RICH (potassium humate with 71-72% humic acid), UNISEARICH (100% organic seaweed extract from Ascophyllum nodosum), and BROUN GOLD (80% fulvic acid). All are designed for sustainable, high-yield farming."
     },
     {
       question: "What is AMINORICH and how does it help crops?",
       answer: "AMINORICH is a powerful product containing 80% amino acids in powder form with 18 different types. It speeds up plant metabolism, helps in all growth stages, increases microflora and microfauna in soil, and 2-3 sprays show a sizable yield increase. It is suitable for all crops including cotton, banana, pomegranate, grapes, tomato, soybean, and chili."
     },
     {
-      question: "Does Unik Biotech offer crop protection products?",
-      answer: "Yes, Unik Biotech offers herbal and organic crop protection products including SUCCESS (herbal thrips and mites control), REMEDY (herbal larvae control), UNILEXIN (downy mildew fungicide), FAST-40 (potassium phosphonate), UNIBACT (bactericide), KUNDAL (100% natural herbal biocide), and ANTINEMATODE (nematode and root rot control)."
+      question: "Does Unik Biotech Research offer crop protection products?",
+      answer: "Yes, Unik Biotech Research offers herbal and organic crop protection products including SUCCESS (herbal thrips and mites control), REMEDY (herbal larvae control), UNILEXIN (downy mildew fungicide), FAST-40 (potassium phosphonate), UNIBACT (bactericide), KUNDAL (100% natural herbal biocide), and ANTINEMATODE (nematode and root rot control)."
     },
     {
-      question: "Which Unik Biotech product is best for grape cultivation?",
-      answer: "For grape cultivation, Unik Biotech recommends ROYAL PLUS (zinc amino acids for bunch quality), LONGER-E (berry elongation), UNIBORO ZINC (prevents short berries), UNISEARICH (seaweed extract for micro-bunch formation), FERROUS EDDHA (iron for high pH soils), and FAST-40 (downy mildew control)."
+      question: "Which Unik Biotech Research product is best for grape cultivation?",
+      answer: "For grape cultivation, Unik Biotech Research recommends ROYAL PLUS (zinc amino acids for bunch quality), LONGER-E (berry elongation), UNIBORO ZINC (prevents short berries), UNISEARICH (seaweed extract for micro-bunch formation), FERROUS EDDHA (iron for high pH soils), and FAST-40 (downy mildew control)."
     }
   ];
 
@@ -182,7 +168,7 @@ export default function Products() {
       <SEO
         title="Our Products — Organic Fertilizers, Biostimulants & Crop Protection"
         description="Explore 100+ agricultural products by Unik Biotech Research: AMINORICH, EXCESS, UNISEARICH, AGROMIC RICH, RHYZOMAX, micronutrient fertilizers, herbal crop protection, soil conditioners & bio fertilizers for all crops."
-        keywords="Unik Biotech products, AMINORICH amino acid fertilizer, EXCESS biostimulant, UNISEARICH seaweed extract, AGROMIC RICH potassium humate, RHYZOMAX root stimulant, organic fertilizer India, crop protection herbal, micronutrient chelated fertilizer, grape fertilizer, pomegranate fertilizer, cotton fertilizer"
+        keywords="Unik Biotech Research products, AMINORICH amino acid fertilizer, EXCESS biostimulant, UNISEARICH seaweed extract, AGROMIC RICH potassium humate, RHYZOMAX root stimulant, organic fertilizer India, crop protection herbal, micronutrient chelated fertilizer, grape fertilizer, pomegranate fertilizer, cotton fertilizer"
         url="https://unikbiotechresearch.com/products"
         lang={lang}
         schema={productListSchema}
@@ -253,51 +239,59 @@ export default function Products() {
               <p className="text-gray-400">{t("products", "noResults")}</p>
             </div>
           ) : (
-            <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 reveal">
-              {filtered.map((product) => {
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filtered.map((product, index) => {
                 const catColor = PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.color || "bg-gray-100 text-gray-700";
                 return (
-                  <div
+                  <motion.div
                     key={product.id}
-                    className="bg-white rounded-2xl border border-gray-100 p-5 group hover:shadow-xl hover:border-green-200 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col h-full"
-                    onClick={() => setSelected(product)}
-                    data-testid={`product-card-${product.id}`}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: (index % 4) * 0.08 }}
+                    className="h-full"
                   >
-                    <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl bg-gray-50">
-                      <ProductImage
-                        src={product.image}
-                        alt={product.name}
-                        imgClassName="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
-                        fallback={
-                          <div className="w-full h-full flex items-center justify-center text-gray-300">
-                            <Package className="w-12 h-12" />
-                          </div>
-                        }
-                      />
-                      <span className={`absolute top-2 right-2 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${catColor}`}>
-                        {product.category}
-                      </span>
-                    </div>
+                    <div
+                      className="bg-white rounded-2xl border border-gray-100 p-5 group hover:shadow-2xl hover:border-green-200 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer flex flex-col h-full"
+                      onClick={() => setSelected(product)}
+                      data-testid={`product-card-${product.id}`}
+                    >
+                      <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl bg-gray-50">
+                        <ProductImage
+                          src={product.image}
+                          alt={product.name}
+                          imgClassName="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-110"
+                          fallback={
+                            <div className="w-full h-full flex items-center justify-center text-gray-300">
+                              <Package className="w-12 h-12" />
+                            </div>
+                          }
+                        />
+                        <span className={`absolute top-2 right-2 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${catColor}`}>
+                          {product.category}
+                        </span>
+                      </div>
 
-                    <div className="flex-1">
-                      <span className={`inline-block text-xs font-semibold mb-2 ${catColor.replace('bg-', 'text-').replace('100', '600')}`}>
-                        {product.tagline}
-                      </span>
-                      <h3 className="font-heading font-bold text-gray-900 text-lg mb-2 leading-tight group-hover:text-green-800 transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
-                        {product.description}
-                      </p>
-                    </div>
+                      <div className="flex-1">
+                        <span className={`inline-block text-xs font-semibold mb-2 ${catColor.replace('bg-', 'text-').replace('100', '600')}`}>
+                          {product.tagline}
+                        </span>
+                        <h3 className="font-heading font-bold text-gray-900 text-lg mb-2 leading-tight group-hover:text-green-800 transition-colors">
+                          {product.name}
+                        </h3>
+                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+                          {product.description}
+                        </p>
+                      </div>
 
-                    <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-xs font-semibold text-green-700/80 group-hover:text-green-800">
-                      <span>{t("products", "viewDetails")}</span>
-                      <div className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
-                        <ChevronRight className="w-3.5 h-3.5" />
+                      <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-xs font-semibold text-green-700/80 transition-colors duration-300 group-hover:text-green-800">
+                        <span>{t("products", "viewDetails")}</span>
+                        <div className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center transition-all duration-300 group-hover:bg-green-100 group-hover:translate-x-0.5">
+                          <ChevronRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

@@ -35,7 +35,7 @@ export default function DealerLocator() {
     }
     setLoading(true);
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiries@unikbiotechresearch.com", {
+      const response = await fetch("https://formsubmit.co/ajax/Sales@unikbiotechresearch.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,16 +63,16 @@ export default function DealerLocator() {
 
   const dealerFAQs = [
     {
-      question: "How can I find a Unik Biotech dealer near me?",
-      answer: "Visit our Dealer Locator page at unikbiotechresearch.com/dealer-locator and search by your district. Unik Biotech has dealers across 35+ districts in Maharashtra including Nashik, Pune, Chhatrapati Sambhajinagar, Solapur, Satara, Sangli, Kolhapur, and more."
+      question: "How can I find a Unik Biotech Research dealer near me?",
+      answer: "Visit our Dealer Locator page at unikbiotechresearch.com/dealer-locator and search by your district. Unik Biotech Research has dealers across 35+ districts in Maharashtra including Nashik, Pune, Chhatrapati Sambhajinagar, Solapur, Satara, Sangli, Kolhapur, and more."
     },
     {
-      question: "How do I become a Unik Biotech dealer?",
-      answer: "To become a Unik Biotech dealer, fill out the dealer application form on our Dealer Locator page with your name, phone number, district, and village. You can also call us directly at 08380017593. Benefits include exclusive distribution rights, marketing support, and access to 100+ quality agricultural products."
+      question: "How do I become a Unik Biotech Research dealer?",
+      answer: "To become a Unik Biotech Research dealer, fill out the dealer application form on our Dealer Locator page with your name, phone number, district, and village. You can also call us directly at +91 7666272741. Benefits include exclusive distribution rights, marketing support, and access to 100+ quality agricultural products."
     },
     {
-      question: "In which districts does Unik Biotech have dealers?",
-      answer: "Unik Biotech has dealers across Maharashtra including Nashik, Pune, Chhatrapati Sambhajinagar, Ahilyanagar, Solapur, Satara, Sangli, Kolhapur, Jalgaon, Dhule, Nandurbar, Nagpur, Amravati, Akola, Buldhana, and many more districts."
+      question: "In which districts does Unik Biotech Research have dealers?",
+      answer: "Unik Biotech Research has dealers across Maharashtra including Nashik, Pune, Chhatrapati Sambhajinagar, Ahilyanagar, Solapur, Satara, Sangli, Kolhapur, Jalgaon, Dhule, Nandurbar, Nagpur, Amravati, Akola, Buldhana, and many more districts."
     }
   ];
 
@@ -80,8 +80,8 @@ export default function DealerLocator() {
     <div className="page-enter">
       <SEO
         title="Dealer Locator — Find a Dealer or Become One"
-        description="Find a Unik Biotech dealer near you across 35+ districts in Maharashtra. Or apply to become a dealer of our premium organic fertilizers, biostimulants & agricultural products."
-        keywords="Unik Biotech dealers, find fertilizer dealer Maharashtra, buy Unik Biotech products, become a fertilizer dealer, Unik Biotech distributors, agricultural products dealer, Nashik fertilizer dealer, organic fertilizer distributor"
+        description="Find a Unik Biotech Research dealer near you across 35+ districts in Maharashtra. Or apply to become a dealer of our premium organic fertilizers, biostimulants & agricultural products."
+        keywords="Unik Biotech Research dealers, find fertilizer dealer Maharashtra, buy Unik Biotech Research products, become a fertilizer dealer, Unik Biotech Research distributors, agricultural products dealer, Nashik fertilizer dealer, organic fertilizer distributor"
         url="https://unikbiotechresearch.com/dealer-locator"
         lang={lang}
         faqSchema={dealerFAQs}
@@ -144,8 +144,8 @@ export default function DealerLocator() {
                     <p className="text-green-700 text-sm">
                       {t("dealer", "foundDesc")}
                     </p>
-                    <a href="tel:08380017593" className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full bg-green-800 text-white text-sm font-semibold hover:bg-green-700 transition-colors">
-                      <Phone className="w-4 h-4" /> 08380017593
+                    <a href="tel:+917666272741" className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full bg-green-800 text-white text-sm font-semibold hover:bg-green-700 transition-colors">
+                      <Phone className="w-4 h-4" /> +91 7666272741
                     </a>
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function DealerLocator() {
                 <div className="flex items-start gap-2"><MapPin className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                   <span>B-178, S.S. Co-Op. Ind. Estate, Pimpalgaon (B), Nashik - 422 209</span></div>
                 <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-green-700" />
-                  <a href="tel:08380017593" className="text-green-700 font-medium hover:underline">08380017593</a></div>
+                  <a href="tel:+917666272741" className="text-green-700 font-medium hover:underline">+91 7666272741</a></div>
               </div>
             </div>
           </div>

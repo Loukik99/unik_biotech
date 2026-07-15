@@ -29,7 +29,7 @@ export default function Contact() {
     }
     setLoading(true);
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiries@unikbiotechresearch.com", {
+      const response = await fetch("https://formsubmit.co/ajax/Sales@unikbiotechresearch.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,8 +61,8 @@ export default function Contact() {
     "name": "Unik Biotech Research",
     "image": "https://unikbiotechresearch.com/official-logo.jpg",
     "url": "https://unikbiotechresearch.com",
-    "telephone": "+91-8380017593",
-    "email": "enquiries@unikbiotechresearch.com",
+    "telephone": "+91-7666272741",
+    "email": "Sales@unikbiotechresearch.com",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -88,11 +88,11 @@ export default function Contact() {
   const contactFAQs = [
     {
       question: "What is Unik Biotech Research's phone number?",
-      answer: "You can reach Unik Biotech Research at 08380017593 or via WhatsApp at +91-8380017593."
+      answer: "You can reach Unik Biotech Research at +91 7666272741 or via WhatsApp at +91-7666272741."
     },
     {
       question: "What is Unik Biotech Research's email address?",
-      answer: "You can email Unik Biotech Research at enquiries@unikbiotechresearch.com for product inquiries, dealer information, or general questions."
+      answer: "You can email Unik Biotech Research at Sales@unikbiotechresearch.com for product inquiries, dealer information, or general questions."
     },
     {
       question: "What is Unik Biotech Research's address?",
@@ -106,8 +106,8 @@ export default function Contact() {
     <div className="page-enter">
       <SEO
         title="Contact Us — Get in Touch"
-        description="Contact Unik Biotech Research in Nashik, Maharashtra for inquiries about organic fertilizers, biostimulants, and agricultural products. Call 08380017593 or email enquiries@unikbiotechresearch.com."
-        keywords="contact Unik Biotech, Unik Biotech phone number, Unik Biotech email, agriculture products Nashik, Unik Biotech address, fertilizer manufacturer contact, WhatsApp Unik Biotech"
+        description="Contact Unik Biotech Research in Nashik, Maharashtra for inquiries about organic fertilizers, biostimulants, and agricultural products. Call +91 7666272741 or email Sales@unikbiotechresearch.com."
+        keywords="contact Unik Biotech Research, Unik Biotech Research phone number, Unik Biotech Research email, agriculture products Nashik, Unik Biotech Research address, fertilizer manufacturer contact, WhatsApp Unik Biotech Research"
         url="https://unikbiotechresearch.com/contact"
         lang={lang}
         schema={localBusinessSchema}
@@ -241,14 +241,14 @@ export default function Contact() {
                   <div className="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0"><Phone className="w-5 h-5" /></div>
                   <div>
                     <div className="text-green-300 text-xs font-semibold uppercase tracking-wide mb-1">{t("contact", "phone2")}</div>
-                    <a href="tel:08380017593" className="text-white hover:text-amber-300 transition-colors text-sm font-medium">08380017593</a>
+                    <a href="tel:+917666272741" className="text-white hover:text-amber-300 transition-colors text-sm font-medium">+91 7666272741</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-4 p-3 -mx-3 rounded-2xl hover:bg-white/5 transition-colors">
                   <div className="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0"><Mail className="w-5 h-5" /></div>
                   <div>
                     <div className="text-green-300 text-xs font-semibold uppercase tracking-wide mb-1">{t("contact", "emailLabel")}</div>
-                    <a href="mailto:enquiries@unikbiotechresearch.com" className="text-white hover:text-amber-300 transition-colors text-sm break-all">enquiries@unikbiotechresearch.com</a>
+                    <a href="mailto:Sales@unikbiotechresearch.com" className="text-white hover:text-amber-300 transition-colors text-sm break-all">Sales@unikbiotechresearch.com</a>
                   </div>
                 </li>
                 <li className="flex items-start gap-4 p-3 -mx-3 rounded-2xl hover:bg-white/5 transition-colors">
@@ -270,7 +270,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/918380017593"
+              href="https://wa.me/917666272741"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="whatsapp-cta"
@@ -286,7 +286,7 @@ export default function Contact() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-56">
               <iframe
-                title="UNIK BIOTECH RESEARCH Location"
+                title="Unik Biotech Research Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.6!2d74.09!3d20.07!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb8b6c28d1e9%3A0x0!2sPimpalgaon+Baswant%2C+Nashik!5e0!3m2!1sen!2sin!4v1000000000000!5m2!1sen!2sin"
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               ></iframe>
