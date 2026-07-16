@@ -5,6 +5,7 @@ import { MotionConfig } from "motion/react";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
+import LandingNav from "@/components/landing/LandingNav";
 import Footer from "@/components/Footer";
 
 const Home = lazy(() => import("@/pages/Home"));
@@ -29,16 +30,22 @@ function PageLoader() {
   );
 }
 
+// Pages that lead with a full-bleed dark hero reuse the homepage's floating
+// glass navbar (transparent overlay at the top → cream glass pill on scroll)
+// so they feel like a seamless extension of the landing page.
+const OVERLAY_NAV_ROUTES = ["/about", "/contact", "/products", "/dealer-locator"];
+
 function AppShell() {
   const { pathname } = useLocation();
   // The editorial homepage ships its own floating nav (and, later, footer),
   // so suppress the global chrome there while keeping it on every other page.
   const isLanding = pathname === "/";
+  const useOverlayNav = OVERLAY_NAV_ROUTES.includes(pathname);
 
   return (
     <>
       <ScrollToTop />
-      {!isLanding && <Navbar />}
+      {!isLanding && (useOverlayNav ? <LandingNav /> : <Navbar />)}
       <main className="min-h-screen">
         <Suspense fallback={<PageLoader />}>
           <Routes>

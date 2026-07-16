@@ -100,6 +100,11 @@ export const en = {
         statYearsWrap: "20+ Years",
         legacyLabel: "Our Legacy",
         journeyTitle: "Milestones of Success",
+        journeySub: "From our humble beginnings to becoming a trusted partner in agriculture, our journey is built on trust, innovation and impact.",
+        growTitle: "Let's Grow Together",
+        growText: "Join us in our mission to empower farmers with innovative solutions and sustainable growth.",
+        growBecome: "Become a Dealer",
+        growFind: "Find a Dealer",
         certTitle: "Quality & Certifications",
         valuesTitle: "Our Core Values",
         values: [
@@ -124,7 +129,7 @@ export const en = {
         crops: "Suitable Crops",
         close: "Close",
         noResults: "No products found. Try a different category or search.",
-        productCountLabel: "products",
+        productCountLabel: "Products Found",
         enquireCall: "Enquire: Call +91 7666272741",
     },
     categories: {

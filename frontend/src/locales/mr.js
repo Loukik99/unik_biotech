@@ -100,6 +100,11 @@ export const mr = {
         statYearsWrap: "२०+ वर्षे",
         legacyLabel: "आमचा वारसा",
         journeyTitle: "यशाचे टप्पे",
+        journeySub: "साध्या सुरुवातीपासून ते शेतीमधील विश्वासार्ह भागीदार होण्यापर्यंत, आमचा प्रवास विश्वास, नवकल्पना आणि प्रभाव यावर आधारित आहे.",
+        growTitle: "चला एकत्र वाढूया",
+        growText: "शेतकऱ्यांना नाविन्यपूर्ण उपायांनी आणि शाश्वत वाढीने सक्षम करण्याच्या आमच्या ध्येयात सहभागी व्हा.",
+        growBecome: "डीलर बना",
+        growFind: "डीलर शोधा",
         certTitle: "गुणवत्ता आणि प्रमाणपत्रे",
         valuesTitle: "आमची मूल्ये",
         values: [
@@ -120,7 +125,7 @@ export const mr = {
         packing: "पॅकिंग",
         crops: "योग्य पिके", close: "बंद करा",
         noResults: "कोणतेही उत्पादन आढळले नाही.",
-        productCountLabel: "उत्पादने",
+        productCountLabel: "उत्पादने आढळली",
         enquireCall: "चौकशीसाठी कॉल करा: +91 7666272741",
     },
     categories: {

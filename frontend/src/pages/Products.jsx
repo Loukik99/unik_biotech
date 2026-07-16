@@ -1,11 +1,55 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { Search, X, ChevronRight, Package, Droplets, Layers, CheckCircle } from "lucide-react";
+import { Search, X, ArrowRight, Package, Droplets, Layers, CheckCircle, Sparkles, Leaf } from "lucide-react";
 import { useLang } from "@/context/LanguageContext";
 import { PRODUCTS, PRODUCT_CATEGORIES } from "@/data/products";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ProductImage from "@/components/common/ProductImage";
 import SEO from "@/components/SEO";
+
+const HERO_IMG = "/unik/mustard-field";
+
+// Compact, editorial badge labels for the product cards (data unchanged).
+const BADGE_LABEL = {
+  micronutrient: "Micronutrient",
+  biostimulant: "Biostimulant",
+  protection: "Protection",
+  soil: "Soil Conditioner",
+  biofertilizer: "Bio Fertilizer",
+  spreader: "Spreader & Sticker",
+};
+
+// --- Motion presets (match the homepage: fade + slide, easeOut, replay on re-entry) ---
+const VIEWPORT = { once: false, amount: 0.2 };
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const heroContainer = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
+const heroItem = {
+  hidden: { opacity: 0, x: -44 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.75, ease: "easeOut" } },
+};
+
+const pillsContainer = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
+const pillItem = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+// Cards alternate: even index enters from the left, odd from the right, with a
+// gentle per-row stagger.
+const cardVariants = {
+  hidden: (i) => ({ opacity: 0, x: i % 2 === 0 ? -46 : 46 }),
+  show: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: "easeOut", delay: (i % 4) * 0.05 },
+  }),
+};
 
 function ProductDetailDialog({ product, open, onClose }) {
   const { t } = useLang();
@@ -178,117 +222,202 @@ export default function Products() {
           { name: "Products", url: "https://unikbiotechresearch.com/products" }
         ]}
       />
-      {/* Header */}
-      <section className="bg-green-800 px-4 pb-16 pt-28 text-center sm:pt-32">
-        <h1 className="font-heading font-extrabold text-white text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight animate-fadeInUp">
-          {t("products", "title")}
-        </h1>
-        <p className="text-green-200 text-base sm:text-lg max-w-2xl mx-auto animate-fadeInUp delay-200">
-          {t("products", "sub")}
-        </p>
-      </section>
-
-      {/* Filters */}
-      <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 py-4 px-4 shadow-sm">
-        <div className="max-w-7xl mx-auto">
-          {/* Search */}
-          <div className="relative max-w-sm mb-4">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder={t("products", "searchLabel")}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              data-testid="product-search"
-              className="w-full pl-9 pr-4 py-2.5 rounded-full border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+      {/* ================= HERO ================= */}
+      <section className="relative isolate flex min-h-[520px] w-full items-center overflow-hidden lg:min-h-[600px]">
+        {/* Background photograph with a slow, subtle zoom */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 will-change-transform"
+          initial={{ scale: 1.06 }}
+          animate={{ scale: 1.14 }}
+          transition={{ duration: 16, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+        >
+          <picture>
+            <source
+              type="image/webp"
+              srcSet={`${HERO_IMG}-1024.webp 1024w, ${HERO_IMG}-1600.webp 1600w, ${HERO_IMG}-2000.webp 2000w, ${HERO_IMG}-2560.webp 2560w`}
+              sizes="100vw"
             />
-            {search && (
-              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-          {/* Category filters */}
-          <div className="flex flex-wrap gap-2">
-            {PRODUCT_CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                data-testid={`filter-${cat.id}`}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === cat.id
-                  ? "bg-green-800 text-white shadow-md"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-              >
-                {t("categories", cat.id)}
-              </button>
-            ))}
-          </div>
+            <img
+              src={`${HERO_IMG}-1600.jpg`}
+              alt="Blooming mustard field at golden hour"
+              className="h-full w-full object-cover object-center"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+        </motion.div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-farm-forestDeep/95 via-farm-forestDeep/80 to-farm-forest/30"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-farm-forestDeep/85 via-transparent to-farm-forestDeep/30"
+        />
+
+        <div className="mx-auto w-full max-w-6xl px-5 pt-28 pb-28 sm:px-6 sm:pt-32">
+          <motion.div
+            variants={heroContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="max-w-2xl"
+          >
+            <motion.h1
+              variants={heroItem}
+              className="font-heading text-5xl font-bold leading-[0.98] tracking-[-0.02em] text-farm-cream sm:text-6xl lg:text-7xl"
+            >
+              {t("products", "title")}
+            </motion.h1>
+            <motion.p
+              variants={heroItem}
+              className="mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/80 sm:text-base"
+            >
+              {t("products", "sub")}
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Product Grid */}
-      <section className="py-12 px-4 bg-[#fcfdfa] min-h-[50vh]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-gray-400 text-sm mb-6">
-            {filtered.length} {t("products", "productCountLabel")}
-          </p>
+      {/* ================= SEARCH + FILTERS (floating) ================= */}
+      <div className="relative z-20 mx-auto -mt-14 w-full max-w-6xl px-5 sm:-mt-20 sm:px-6">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="rounded-[24px] border border-gray-100 bg-white p-5 shadow-[0_30px_70px_-30px_rgba(16,20,24,0.35)] sm:p-6"
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            {/* Search */}
+            <div className="relative w-full sm:max-w-sm">
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder={t("products", "searchLabel")}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                data-testid="product-search"
+                className="w-full rounded-full border border-gray-200 bg-gray-50/70 py-3 pl-11 pr-10 text-sm text-gray-800 placeholder-gray-400 outline-none transition-[background-color,border-color,box-shadow] duration-300 ease-out focus:border-brand-green/60 focus:bg-white focus:shadow-lg focus:shadow-brand-green/15 focus:ring-2 focus:ring-brand-green/20"
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  aria-label="Clear search"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-gray-600"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            {/* Count badge */}
+            <div className="inline-flex shrink-0 items-center gap-2 rounded-full border border-green-100 bg-green-50 px-4 py-2 text-sm font-semibold text-green-800">
+              <Sparkles className="h-4 w-4" />
+              {filtered.length} {t("products", "productCountLabel")}
+            </div>
+          </div>
+
+          {/* Category pills */}
+          <motion.div
+            variants={pillsContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEWPORT}
+            className="mt-5 flex flex-wrap gap-2"
+          >
+            {PRODUCT_CATEGORIES.map((cat) => (
+              <motion.button
+                key={cat.id}
+                variants={pillItem}
+                onClick={() => setActiveCategory(cat.id)}
+                data-testid={`filter-${cat.id}`}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-[background-color,color,box-shadow,transform] duration-200 ease-out ${
+                  activeCategory === cat.id
+                    ? "bg-brand-green text-white shadow-md shadow-green-900/20"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {t("categories", cat.id)}
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* ================= PRODUCT GRID ================= */}
+      <section className="bg-[#fcfdfa] px-5 pb-6 pt-10 sm:px-6 sm:pt-12">
+        <div className="mx-auto min-h-[40vh] max-w-6xl">
           {filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <div className="py-20 text-center">
+              <Package className="mx-auto mb-4 h-12 w-12 text-gray-300" />
               <p className="text-gray-400">{t("products", "noResults")}</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filtered.map((product, index) => {
-                const catColor = PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.color || "bg-gray-100 text-gray-700";
+                const catColor =
+                  PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.color ||
+                  "bg-gray-100 text-gray-700";
                 return (
                   <motion.div
                     key={product.id}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.5, ease: "easeOut", delay: (index % 4) * 0.08 }}
+                    custom={index}
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={VIEWPORT}
                     className="h-full"
                   >
                     <div
-                      className="bg-white rounded-2xl border border-gray-100 p-5 group hover:shadow-2xl hover:border-green-200 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer flex flex-col h-full"
+                      className="group flex h-full cursor-pointer flex-col rounded-[28px] border border-gray-100 bg-white p-5 shadow-soft transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-2.5 hover:border-green-200 hover:shadow-[0_40px_80px_-30px_rgba(16,20,24,0.4)]"
                       onClick={() => setSelected(product)}
                       data-testid={`product-card-${product.id}`}
                     >
-                      <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl bg-gray-50">
+                      {/* Image */}
+                      <div className="relative mb-4 flex aspect-square items-center justify-center overflow-hidden rounded-2xl">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-5 rounded-full bg-gradient-to-b from-gray-50 to-green-50/50"
+                        />
                         <ProductImage
                           src={product.image}
                           alt={product.name}
-                          imgClassName="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-110"
+                          imgClassName="relative h-full w-full object-contain p-4 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-105"
                           fallback={
-                            <div className="w-full h-full flex items-center justify-center text-gray-300">
-                              <Package className="w-12 h-12" />
+                            <div className="flex h-full w-full items-center justify-center text-gray-300">
+                              <Package className="h-12 w-12" />
                             </div>
                           }
                         />
-                        <span className={`absolute top-2 right-2 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${catColor}`}>
-                          {product.category}
+                        <span
+                          className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${catColor}`}
+                        >
+                          {BADGE_LABEL[product.category] || product.category}
                         </span>
                       </div>
 
-                      <div className="flex-1">
-                        <span className={`inline-block text-xs font-semibold mb-2 ${catColor.replace('bg-', 'text-').replace('100', '600')}`}>
-                          {product.tagline}
-                        </span>
-                        <h3 className="font-heading font-bold text-gray-900 text-lg mb-2 leading-tight group-hover:text-green-800 transition-colors">
+                      {/* Body */}
+                      <div className="flex-1 px-1">
+                        <h3 className="font-heading text-lg font-bold leading-tight text-gray-900 transition-colors duration-300 group-hover:text-brand-green">
                           {product.name}
                         </h3>
-                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+                        <p className="mt-1.5 text-xs font-semibold text-brand-green/80">
+                          {product.tagline}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-2">
                           {product.description}
                         </p>
                       </div>
 
-                      <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-xs font-semibold text-green-700/80 transition-colors duration-300 group-hover:text-green-800">
-                        <span>{t("products", "viewDetails")}</span>
-                        <div className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center transition-all duration-300 group-hover:bg-green-100 group-hover:translate-x-0.5">
-                          <ChevronRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                        </div>
+                      {/* Footer */}
+                      <div className="mt-5 flex items-center justify-between px-1">
+                        <span className="text-sm font-semibold text-brand-green">
+                          {t("products", "viewDetails")}
+                        </span>
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-green-100 bg-green-50 text-brand-green transition-[transform,background-color] duration-300 ease-out group-hover:translate-x-1 group-hover:bg-green-100">
+                          <ArrowRight className="h-4 w-4" />
+                        </span>
                       </div>
                     </div>
                   </motion.div>
@@ -297,6 +426,46 @@ export default function Products() {
             </div>
           )}
         </div>
+      </section>
+
+      {/* ================= BOTTOM CTA ================= */}
+      <section className="bg-[#fcfdfa] px-5 pb-20 pt-8 sm:px-6">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT}
+          className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-gray-100 bg-white p-8 shadow-soft sm:p-10"
+        >
+          {/* Decorative leaf illustration */}
+          <Leaf
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-6 -right-4 h-40 w-40 rotate-12 text-brand-green/[0.06]"
+            strokeWidth={0.9}
+          />
+          <div className="relative z-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-green-50 text-brand-green">
+                <Leaf className="h-6 w-6" strokeWidth={1.75} />
+              </span>
+              <div>
+                <h3 className="font-heading text-xl font-bold text-gray-900 sm:text-2xl">
+                  Can&rsquo;t find what you&rsquo;re looking for?
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
+                  Our team is here to help you choose the right solution for your crops.
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/contact"
+              className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-green-900/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark"
+            >
+              Talk to Our Experts
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </motion.div>
       </section>
 
       <ProductDetailDialog

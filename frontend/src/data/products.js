@@ -249,6 +249,7 @@ export const PRODUCTS = [
   {
     id: 101, name: "REMOK", category: "protection", featured: false,
     tagline: "Antinematode Solution",
+    image: "/products/remok.png",
     description: "Highly effective solution for controlling nematodes in crops. Enhances root growth and protects the plant base.",
     benefits: ["Controls soil nematodes", "Protects root system", "Improves overall plant health"],
     composition: "Specialized Nematode Control agents",
@@ -313,6 +314,7 @@ export const PRODUCTS = [
   {
     id: 102, name: "RHYZOMAX", category: "biofertilizer", featured: true,
     tagline: "Advanced Root & Growth Stimulant",
+    image: "/products/rhyz.png",
     description: "Rhyzomax enhances robust root development and helps plants access more nutrients from the soil, greatly improving overall vitality.",
     benefits: ["Promotes massive root growth", "Increases nutrient absorption", "Enhances plant vitality and stress tolerance", "Improves soil biological activity"],
     composition: "Beneficial microorganisms and root stimulants",
@@ -322,6 +324,7 @@ export const PRODUCTS = [
   {
     id: 103, name: "RHIZOSPROUT", category: "biofertilizer", featured: true,
     tagline: "Seed & Sprout Enhancer",
+    image: "/products/rhyzosprout.png",
     description: "Optimized for seed treatment and early seedling development to ensure a vigorous start to the crop cycle.",
     benefits: ["Improves germination rate", "Protects seeds from soil-borne pathogens", "Ensures early vigor"],
     composition: "Organic sprout enhancers and beneficial microbes",
@@ -331,6 +334,7 @@ export const PRODUCTS = [
   {
     id: 29, name: "AZOTOBACTOR", category: "biofertilizer", featured: false,
     tagline: "Nitrogen-Fixing Biofertilizer",
+    image: "/products/azoto.png",
     description: "Nitrogen-fixing biofertilizer for enhanced soil nitrogen availability and crop nutrition.",
     benefits: ["Fixes atmospheric nitrogen", "Improves soil nitrogen content", "Reduces chemical fertilizer need", "Eco-friendly"],
     composition: "Azotobacter chroococcum",
@@ -340,6 +344,7 @@ export const PRODUCTS = [
   {
     id: 30, name: "MYCORRHIZA", category: "biofertilizer", featured: false,
     tagline: "Root Enhancement Fungi",
+    image: "/products/mycoo.png",
     description: "Mycorrhizal fungi that significantly increase root absorption area, improving nutrient and water uptake.",
     benefits: ["Increases root absorption area", "Improves phosphorus uptake", "Better drought tolerance", "Stronger root system"],
     composition: "Mycorrhizal fungi",
@@ -349,6 +354,7 @@ export const PRODUCTS = [
   {
     id: 31, name: "P.S.B.", category: "biofertilizer", featured: false,
     tagline: "Phosphate Solubilizing Bacteria",
+    image: "/products/psb.png",
     description: "Phosphate Solubilizing Bacteria that converts insoluble phosphorus in soil to plant-available form.",
     benefits: ["Solubilizes fixed phosphorus", "Reduces phosphate fertilizer need", "Improves soil health"],
     composition: "Phosphate Solubilizing Bacteria",
