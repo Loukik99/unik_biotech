@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+Disallow: /static/
+
+# Sitemap
+Sitemap: https://unikbiotechresearch.com/sitemap.xml
+
+# LLMs.txt for AI crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Anthropic-AI
+Allow: /
+Allow: /llms.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Host
+Host: https://unikbiotechresearch.com

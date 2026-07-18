@@ -1,0 +1,192 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1F7A3D;
+  --color-primary-dark: #13452C;
+  --color-accent: #5DBB63;
+  --color-gold: #f59e0b;
+  --color-bg: #F6FAF7;
+  --color-bg-dark: #101418;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Satoshi', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-marathi {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(22, 101, 52, 0); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-floatY { animation: floatY 6s ease-in-out infinite; }
+.animate-floatY-slow { animation: floatY 8.5s ease-in-out infinite; }
+
+.animate-fadeInUp { animation: fadeInUp 0.65s ease both; }
+.animate-fadeIn { animation: fadeIn 0.5s ease both; }
+.animate-slideInLeft { animation: slideInLeft 0.6s ease both; }
+.animate-scaleIn { animation: scaleIn 0.5s ease both; }
+.animate-pulse-green { animation: pulse-green 2s infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #1F7A3D; border-radius: 10px; }
+
+/* Page transitions */
+.page-enter {
+  animation: fadeIn 0.4s ease both;
+}
+
+/* Product card image zoom */
+.product-img {
+  transition: transform 0.5s ease;
+}
+.group:hover .product-img {
+  transform: scale(1.06);
+}
+
+/* Gradient text - for company name */
+.text-gradient-green {
+  background: linear-gradient(135deg, #1F7A3D, #5DBB63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass nav */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hero overlay */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.55) 0%,
+    rgba(22, 101, 52, 0.4) 50%,
+    rgba(15, 23, 42, 0.7) 100%
+  );
+}
+
+/* Badge shine */
+.badge-iso {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 140 60% 30%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 140 60% 30%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+  [data-debug-wrapper="true"] { display: contents !important; }
+}
+
+/* Smooth in-page scrolling (e.g. hero scroll chevron / anchor jumps) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect users who prefer reduced motion: disable animations gracefully */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

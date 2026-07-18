@@ -1,0 +1,184 @@
+[
+  {
+    "slug": "paddy-transplanting",
+    "index": 1,
+    "width": 7952,
+    "height": 4208,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "grain-drying",
+    "index": 10,
+    "width": 5400,
+    "height": 3600,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "aerial-fields",
+    "index": 11,
+    "width": 5464,
+    "height": 3070,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "rice-macro",
+    "index": 12,
+    "width": 3000,
+    "height": 4496,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "wheat-panorama",
+    "index": 13,
+    "width": 4032,
+    "height": 1960,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "tea-harvest-path",
+    "index": 14,
+    "width": 4368,
+    "height": 2912,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "tea-pickers-hills",
+    "index": 2,
+    "width": 4368,
+    "height": 2912,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "tea-plucking",
+    "index": 3,
+    "width": 4368,
+    "height": 2912,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "tea-plantation",
+    "index": 4,
+    "width": 4368,
+    "height": 2912,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "wheat-golden",
+    "index": 5,
+    "width": 3072,
+    "height": 4096,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "mustard-farmer",
+    "index": 6,
+    "width": 5600,
+    "height": 3999,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "mustard-field",
+    "index": 7,
+    "width": 6000,
+    "height": 4000,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "rice-spraying",
+    "index": 8,
+    "width": 4928,
+    "height": 3264,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  },
+  {
+    "slug": "farmer-valley",
+    "index": 9,
+    "width": 5184,
+    "height": 3456,
+    "widths": [
+      640,
+      1024,
+      1600,
+      2000,
+      2560
+    ]
+  }
+]
