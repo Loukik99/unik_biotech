@@ -32,6 +32,7 @@ const NAME_BY_INDEX = {
   12: "rice-macro",
   13: "wheat-panorama",
   14: "tea-harvest-path",
+  15: "agriculture-4",
 };
 
 const WIDTHS = [640, 1024, 1600, 2000, 2560];

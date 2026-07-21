@@ -40,6 +40,9 @@ export default function Footer() {
     { to: "/dealer-locator", label: t("nav", "dealerLocator") },
     { to: "/dealer-locator#faq", label: "FAQ" },
     { to: "/contact", label: t("nav", "contact") },
+    { to: "/cookie-policy", label: "Cookie Policy" },
+    { to: "/privacy-policy", label: "Privacy Policy" },
+    { to: "/terms-and-conditions", label: "Terms & Conditions" },
   ];
 
   return (
@@ -129,10 +132,21 @@ export default function Footer() {
           </Reveal>
 
         {/* Bottom bar */}
-        <div className="relative z-10 mx-auto mt-10 flex w-full max-w-[1400px] flex-col items-center gap-3 border-t border-farm-olive/40 pt-6 text-center sm:w-[90%] sm:flex-row sm:justify-center sm:text-left lg:w-[85%]">
+        <div className="relative z-10 mx-auto mt-10 flex w-full max-w-[1400px] flex-col items-center gap-3 border-t border-farm-olive/40 pt-6 text-center sm:w-[90%] sm:flex-row sm:justify-between sm:text-left lg:w-[85%]">
           <p className={cn("text-xs text-white/60", mr)}>
             © {year} Unik Biotech Research. {t("footer", "rights")}
           </p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <Link to="/cookie-policy" className="text-xs text-white/60 transition-colors hover:text-white">
+              Cookie Policy
+            </Link>
+            <Link to="/privacy-policy" className="text-xs text-white/60 transition-colors hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-and-conditions" className="text-xs text-white/60 transition-colors hover:text-white">
+              Terms &amp; Conditions
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>

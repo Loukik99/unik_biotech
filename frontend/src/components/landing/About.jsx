@@ -65,7 +65,7 @@ export default function About() {
             >
               <div className="overflow-hidden rounded-[28px] shadow-[0_24px_60px_-40px_rgba(27,26,22,0.5)]">
                 <FarmImage
-                  name="aerial-fields"
+                  name="agriculture-4"
                   alt="Aerial view of lush Indian paddy fields threaded by a river at sunrise"
                   sizes="(max-width: 1024px) 100vw, 700px"
                   className="block aspect-[4/3] w-full lg:aspect-[16/9]"

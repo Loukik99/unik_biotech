@@ -30,8 +30,8 @@ export default function Mission() {
             <div className="relative">
               <div className="overflow-hidden rounded-[26px]">
                 <FarmImage
-                  name="tea-plucking"
-                  alt="An Indian farmer carefully hand-plucking fresh tea leaves in the field"
+                  name="sugarcane-harvesting"
+                  alt="Sugarcane harvesting in an Indian agricultural field"
                   sizes="(max-width: 1024px) 100vw, 640px"
                   className="block aspect-[4/5] w-full sm:aspect-[3/2] lg:aspect-[4/5]"
                   imgClassName="h-full w-full object-cover"

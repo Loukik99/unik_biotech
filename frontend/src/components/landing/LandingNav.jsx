@@ -79,15 +79,29 @@ export default function LandingNav() {
         {/* Logo — official Unik Biotech Research lockup, transparent PNG with no wrapper
             chip so it blends into the navbar on both the dark hero and the cream
             scrolled state. */}
-        <Link to="/" className="group flex shrink-0 items-center" aria-label="Unik Biotech Research — home">
-          <span className="flex h-11 items-center">
-            <img
-              src="/official-logo.png"
-              alt="Unik Biotech Research Logo"
-              className="h-full max-h-8 w-auto object-contain object-center sm:max-h-9"
-              draggable="false"
-            />
-          </span>
+        <Link to="/" className="group flex h-11 shrink-0 items-center gap-1.5 max-w-[220px]" aria-label="Unik Biotech Research — home">
+          <img
+            src="/official-logo.png"
+            alt="Unik Biotech Research Logo"
+            className="h-full max-h-8 w-auto shrink-0 object-contain object-center sm:max-h-9"
+            draggable="false"
+          />
+          <div className="flex min-w-0 flex-col justify-center leading-none">
+            <span
+              className={`whitespace-nowrap text-xs font-semibold transition-colors duration-300 sm:text-[13px] ${
+                scrolled ? "text-farm-ink" : "text-farm-cream"
+              }`}
+            >
+              Unik Biotech
+            </span>
+            <span
+              className={`whitespace-nowrap text-[10px] font-normal transition-colors duration-300 sm:text-[11px] ${
+                scrolled ? "text-farm-ink/55" : "text-farm-cream/65"
+              }`}
+            >
+              Research
+            </span>
+          </div>
         </Link>
 
         {/* Center links */}

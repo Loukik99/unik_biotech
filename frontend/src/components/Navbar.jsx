@@ -63,12 +63,24 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? "h-16" : "h-16 rounded-full border border-white/10 bg-brand-bgDark/50 px-4 shadow-lg shadow-black/25 backdrop-blur-xl sm:px-6"}`}>
           {/* Logo */}
-          <Link to="/" className="flex h-12 items-center gap-2 group shrink-0" data-testid="navbar-logo">
+          <Link to="/" className="flex h-12 items-center gap-1 group shrink-0 max-w-[220px]" data-testid="navbar-logo">
             <img
               src="/official-logo.png"
               alt="Unik Biotech Research Logo"
-              className={`h-full w-auto object-contain object-center transition-all duration-300 group-hover:scale-105 ${isScrolled ? "max-h-10 sm:max-h-11" : "max-h-11 sm:max-h-12"}`}
+              className={`h-full w-auto shrink-0 object-contain object-center transition-all duration-300 group-hover:scale-105 ${isScrolled ? "max-h-10 sm:max-h-11" : "max-h-11 sm:max-h-12"}`}
             />
+            <div className="flex min-w-0 flex-col justify-center leading-none">
+              <span
+                className={`whitespace-nowrap text-xs font-semibold transition-colors duration-300 sm:text-[13px] ${isScrolled ? "text-gray-800" : "text-white"}`}
+              >
+                Unik Biotech
+              </span>
+              <span
+                className={`whitespace-nowrap text-[10px] font-normal transition-colors duration-300 sm:text-[11px] ${isScrolled ? "text-gray-500" : "text-white/65"}`}
+              >
+                Research
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}

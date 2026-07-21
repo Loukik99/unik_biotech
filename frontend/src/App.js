@@ -8,12 +8,16 @@ import Navbar from "@/components/Navbar";
 import LandingNav from "@/components/landing/LandingNav";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Products = lazy(() => import("@/pages/Products"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const DealerLocator = lazy(() => import("@/pages/DealerLocator"));
+const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("@/pages/TermsAndConditions"));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -81,11 +85,15 @@ function AppShell() {
             <Route path="/products" element={<Products />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/dealer-locator" element={<DealerLocator />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </Suspense>
       </main>
       {!isLanding && <Footer />}
+      <CookieConsentBanner />
       <FloatingWhatsApp />
       <Toaster position="top-right" richColors />
     </>
