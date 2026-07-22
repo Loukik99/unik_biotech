@@ -79,22 +79,20 @@ const STORY_STATS = [
   { icon: ShieldCheck, value: "ISO 9001", labelKey: "statCert" },
 ];
 
-const CERTS = [
-  { icon: Award, title: "ISO 9001:2008", desc: "ISO 9001:2008 Certified — Quality Management System" },
-  { icon: Beaker, title: "Lab Tested", desc: "Every product is rigorously tested in our lab before dispatch" },
-  { icon: Leaf, title: "Made in Nashik", desc: "Manufactured at Pimpalgaon Baswant, Nashik, Maharashtra" },
-];
-
-const VALUE_META = [
-  { icon: CheckCircle, title: "Quality", desc: "Quality is our foundation. Every product is made with precision and care." },
-  { icon: Users, title: "Teamwork", desc: "Together we grow. Our team works collaboratively to achieve excellence." },
-  { icon: Beaker, title: "Innovation", desc: "Pioneering the future of agriculture with continuous innovation." },
-  { icon: Clock, title: "Punctuality", desc: "Delivering on time, every time. Reliability you can count on." },
-];
+const CERT_ICONS = [Award, Beaker, Leaf];
+const VALUE_ICONS = [CheckCircle, Users, Beaker, Clock];
 
 export default function About() {
   const { t, lang } = useLang();
   const mr = lang === "mr" ? "font-marathi" : "";
+  const certsRaw = t("about", "certs");
+  const CERTS = Array.isArray(certsRaw)
+    ? certsRaw.map((c, i) => ({ ...c, icon: CERT_ICONS[i] }))
+    : [];
+  const valuesRaw = t("about", "pageValues");
+  const VALUE_META = Array.isArray(valuesRaw)
+    ? valuesRaw.map((v, i) => ({ ...v, icon: VALUE_ICONS[i] }))
+    : [];
 
   const aboutFAQs = [
     {

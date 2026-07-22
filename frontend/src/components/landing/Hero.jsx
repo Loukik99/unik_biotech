@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, BadgeCheck } from "lucide-react";
 import FarmImage from "@/components/landing/FarmImage";
+import { useLang } from "@/context/LanguageContext";
 
 const HEADLINE = ["Unik", "Biotech", "Research"];
 
@@ -29,6 +30,8 @@ const FADE = 1.4; // crossfade 1.4s for a smoother blend
 const KEN_BURNS = (HOLD_MS + FADE * 1000) / 1000; // scale drift spans hold + fade
 
 export default function Hero() {
+  const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
   const [index, setIndex] = useState(0); // always starts from the first image on load
   const [reduced, setReduced] = useState(false);
   const timer = useRef(null);
@@ -130,10 +133,9 @@ export default function Hero() {
               hidden: { opacity: 0, y: 12 },
               show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
             }}
-            className="mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/85 sm:text-base lg:text-lg"
+            className={`mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/85 sm:text-base lg:text-lg ${mr}`}
           >
-            Trusted by farmers across India. Delivering quality agricultural inputs
-            for better yields, healthier soil, and sustainable farming since 2005.
+            {t("landing", "heroSub")}
           </motion.p>
 
           <motion.div
@@ -145,16 +147,16 @@ export default function Hero() {
           >
             <Link
               to="/products"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-farm-gold px-7 py-3.5 text-[15px] font-semibold text-farm-forestDeep shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-goldSoft"
+              className={`group inline-flex items-center justify-center gap-2 rounded-full bg-farm-gold px-7 py-3.5 text-[15px] font-semibold text-farm-forestDeep shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-goldSoft ${mr}`}
             >
-              Explore Our Products
+              {t("landing", "heroCta1")}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <Link
               to="/contact"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/12"
+              className={`group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/12 ${mr}`}
             >
-              Talk to Our Team
+              {t("landing", "heroCta2")}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -173,9 +175,9 @@ export default function Hero() {
             <BadgeCheck className="h-6 w-6" strokeWidth={1.75} />
           </span>
           <div className="leading-tight">
-            <p className="font-heading text-[15px] font-bold text-farm-ink">ISO 9001:2008</p>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-farm-oliveDeep">
-              Certified
+            <p className="font-heading text-[15px] font-bold text-farm-ink">{t("hero", "isoLabel")}</p>
+            <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] text-farm-oliveDeep ${mr}`}>
+              {t("hero", "certified")}
             </p>
           </div>
         </div>

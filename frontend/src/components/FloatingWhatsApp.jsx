@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import { useLang } from "@/context/LanguageContext";
 
 const WHATSAPP_NUMBER = "917666272741";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 export default function FloatingWhatsApp() {
+  const { t } = useLang();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function FloatingWhatsApp() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={t("contact", "whatsapp")}
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={
         mounted

@@ -1,25 +1,29 @@
 import FarmImage from "@/components/landing/FarmImage";
 import { SlideReveal } from "@/components/animations/SlideReveal";
+import { useLang } from "@/context/LanguageContext";
 
 export default function Mission() {
+  const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
+
   return (
     <section className="relative w-full overflow-hidden bg-farm-cream py-24 sm:py-28 lg:py-36">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Text — comfortable reading width, offset to the left */}
           <SlideReveal direction="left" className="lg:col-span-5 lg:pr-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep">
-              Our Mission
+            <p className={`text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep ${mr}`}>
+              {t("landing", "missionEyebrow")}
             </p>
 
-            <h2 className="mt-6 font-heading text-[2rem] font-semibold leading-[1.08] tracking-[-0.02em] text-farm-ink sm:text-4xl lg:text-[2.9rem]">
-              Empowering <span className="text-farm-forest">Indian Agriculture</span> Through Innovation
+            <h2 className={`mt-6 font-heading text-[2rem] font-semibold leading-[1.08] tracking-[-0.02em] text-farm-ink sm:text-4xl lg:text-[2.9rem] ${mr}`}>
+              {t("landing", "missionHeadingBefore")}{" "}
+              <span className="text-farm-forest">{t("landing", "missionHighlight")}</span>{" "}
+              {t("landing", "missionHeadingAfter")}
             </h2>
 
-            <p className="mt-7 max-w-md text-[15px] leading-relaxed text-farm-ink/70 sm:text-base">
-              At Unik Biotech Research, we combine science, sustainable farming practices,
-              and innovative agricultural solutions to help farmers improve soil health, increase
-              crop productivity, and build a more sustainable future for agriculture.
+            <p className={`mt-7 max-w-md text-[15px] leading-relaxed text-farm-ink/70 sm:text-base ${mr}`}>
+              {t("landing", "missionText")}
             </p>
           </SlideReveal>
 

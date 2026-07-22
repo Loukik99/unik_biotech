@@ -78,31 +78,26 @@ const HERO_IMG = "/unik/wheat-panorama";
 const CONTACT_CARDS = [
   {
     icon: MapPin,
-    label: "Our Address",
-    lines: [
-      "Unik Biotech Research",
-      "B-178, S.S. Co-Op. Ind. Estate,",
-      "Pimpalgaon (B), Tal. Niphad,",
-      "Dist. Nashik - 422 209,",
-      "Maharashtra, India",
-    ],
+    labelKey: "addressLabel",
+    linesKey: "addressLines",
   },
   {
     icon: Mail,
-    label: "Email Us",
+    labelKey: "emailUs",
     lines: ["Sales@unikbiotechresearch.com"],
     href: "mailto:Sales@unikbiotechresearch.com",
   },
   {
     icon: Phone,
-    label: "Call Us",
+    labelKey: "callUs",
     lines: ["+91 7666272741"],
     href: "tel:+917666272741",
   },
 ];
 
 export default function Contact() {
-  const { lang } = useLang();
+  const { t, tArr, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -117,7 +112,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.message) {
-      toast.error("Please fill in your name, phone number and message.");
+      toast.error(t("contact", "fillError"));
       return;
     }
     setLoading(true);
@@ -136,13 +131,13 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        toast.success("Message sent successfully! We'll contact you soon.");
+        toast.success(t("contact", "success"));
         setForm({ name: "", email: "", phone: "", subject: "", message: "" });
       } else {
-        toast.error("Failed to send. Please try calling us directly.");
+        toast.error(t("contact", "error"));
       }
     } catch {
-      toast.error("Failed to send. Please try calling us directly.");
+      toast.error(t("contact", "error"));
     } finally {
       setLoading(false);
     }
@@ -260,16 +255,15 @@ export default function Contact() {
           >
             <motion.h1
               variants={heroItem}
-              className="font-heading text-5xl font-bold leading-[0.95] tracking-[-0.02em] text-farm-cream sm:text-6xl lg:text-7xl"
+              className={`font-heading text-5xl font-bold leading-[0.95] tracking-[-0.02em] text-farm-cream sm:text-6xl lg:text-7xl ${mr}`}
             >
-              Contact Us
+              {t("contact", "title")}
             </motion.h1>
             <motion.p
               variants={heroItem}
-              className="mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/80 sm:text-base"
+              className={`mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/80 sm:text-base ${mr}`}
             >
-              We&rsquo;re here to help you with the best solutions for a healthier and more
-              productive tomorrow.
+              {t("contact", "sub")}
             </motion.p>
           </motion.div>
         </div>
@@ -302,8 +296,8 @@ export default function Contact() {
           >
             <span className="h-px w-8 bg-farm-gold/50 sm:w-12" />
             <ArrowRight className="h-4 w-4 text-farm-gold" aria-hidden="true" />
-            <h2 className="font-heading text-2xl font-bold tracking-tight text-farm-cream sm:text-3xl">
-              Get in Touch
+            <h2 className={`font-heading text-2xl font-bold tracking-tight text-farm-cream sm:text-3xl ${mr}`}>
+              {t("contact", "infoTitle")}
             </h2>
             <ArrowLeft className="h-4 w-4 text-farm-gold" aria-hidden="true" />
             <span className="h-px w-8 bg-farm-gold/50 sm:w-12" />
@@ -319,6 +313,8 @@ export default function Contact() {
           >
             {CONTACT_CARDS.map((card, index) => {
               const Icon = card.icon;
+              const label = t("contact", card.labelKey);
+              const lines = card.linesKey ? tArr("contact", card.linesKey) : card.lines;
               const body = (
                 <>
                   <span className="relative mx-auto flex h-14 w-14 items-center justify-center">
@@ -330,11 +326,11 @@ export default function Contact() {
                       <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
                     </span>
                   </span>
-                  <h3 className="mt-5 text-center font-heading text-lg font-semibold text-farm-cream">
-                    {card.label}
+                  <h3 className={`mt-5 text-center font-heading text-lg font-semibold text-farm-cream ${mr}`}>
+                    {label}
                   </h3>
-                  <div className="mt-3 space-y-0.5 text-center text-sm leading-relaxed text-farm-cream/70">
-                    {card.lines.map((line) => (
+                  <div className={`mt-3 space-y-0.5 text-center text-sm leading-relaxed text-farm-cream/70 ${mr}`}>
+                    {lines.map((line) => (
                       <p key={line}>{line}</p>
                     ))}
                   </div>
@@ -344,7 +340,7 @@ export default function Contact() {
               const shell =
                 "group flex h-full flex-col items-center rounded-[24px] border border-white/12 bg-white/[0.06] p-7 shadow-glass backdrop-blur-xl transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-farm-gold/30 hover:bg-white/[0.09] hover:shadow-[0_30px_60px_-24px_rgba(0,0,0,0.65)] sm:p-8";
               return (
-                <motion.div key={card.label} variants={cardVariants} custom={index}>
+                <motion.div key={card.labelKey} variants={cardVariants} custom={index}>
                   {card.href ? (
                     <a href={card.href} className={shell}>
                       {body}
@@ -366,16 +362,15 @@ export default function Contact() {
                 className="relative flex flex-col justify-between overflow-hidden border-b border-white/10 bg-farm-forest/30 p-8 sm:p-10 lg:col-span-2 lg:border-b-0 lg:border-r"
               >
                 <div className="relative z-10">
-                  <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-farm-gold">
+                  <span className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-farm-gold ${mr}`}>
                     <Leaf className="h-3.5 w-3.5" aria-hidden="true" />
-                    Send Us a Message
+                    {t("contact", "formEyebrow")}
                   </span>
-                  <h3 className="mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-farm-cream sm:text-[2.25rem]">
-                    We&rsquo;d Love to Hear From You
+                  <h3 className={`mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-farm-cream sm:text-[2.25rem] ${mr}`}>
+                    {t("contact", "formHeading")}
                   </h3>
-                  <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-farm-cream/70">
-                    Have a question, suggestion or need support? Fill out the form and our team
-                    will get back to you soon.
+                  <p className={`mt-5 max-w-sm text-[15px] leading-relaxed text-farm-cream/70 ${mr}`}>
+                    {t("contact", "formIntro")}
                   </p>
                 </div>
 
@@ -412,7 +407,7 @@ export default function Contact() {
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="Full Name"
+                      placeholder={t("contact", "namePlaceholder")}
                       data-testid="contact-name"
                       className={inputBase}
                     />
@@ -424,7 +419,7 @@ export default function Contact() {
                       name="email"
                       value={form.email}
                       onChange={handleChange}
-                      placeholder="Email Address"
+                      placeholder={t("contact", "emailPlaceholder")}
                       data-testid="contact-email"
                       className={inputBase}
                     />
@@ -436,7 +431,7 @@ export default function Contact() {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      placeholder="Phone Number"
+                      placeholder={t("contact", "phonePlaceholder")}
                       data-testid="contact-phone"
                       className={inputBase}
                     />
@@ -448,7 +443,7 @@ export default function Contact() {
                       name="subject"
                       value={form.subject}
                       onChange={handleChange}
-                      placeholder="Subject"
+                      placeholder={t("contact", "subjectPlaceholder")}
                       data-testid="contact-subject"
                       className={inputBase}
                     />
@@ -460,7 +455,7 @@ export default function Contact() {
                       name="message"
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Message"
+                      placeholder={t("contact", "messagePlaceholder")}
                       rows={5}
                       data-testid="contact-message"
                       className="w-full resize-none rounded-xl border border-white/12 bg-white/[0.06] py-3.5 pl-11 pr-4 text-sm text-farm-cream placeholder-white/40 outline-none transition-[background-color,border-color,box-shadow,color] duration-300 ease-out focus:border-brand-greenAccent/60 focus:bg-white/[0.1] focus:shadow-lg focus:shadow-brand-greenAccent/20 focus:ring-2 focus:ring-brand-greenAccent/25 focus:placeholder-white/25"
@@ -475,10 +470,10 @@ export default function Contact() {
                       className="group inline-flex items-center justify-center gap-2 rounded-full bg-farm-forest px-8 py-3.5 text-[15px] font-semibold text-farm-cream shadow-lg shadow-black/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:bg-farm-moss hover:shadow-xl hover:shadow-black/30 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:scale-100"
                     >
                       {loading ? (
-                        <span>Sending&hellip;</span>
+                        <span className={mr}>{t("contact", "sending")}</span>
                       ) : (
                         <>
-                          <span>Send Message</span>
+                          <span className={mr}>{t("contact", "submit")}</span>
                           <Send className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-[5px]" aria-hidden="true" />
                         </>
                       )}
@@ -497,16 +492,15 @@ export default function Contact() {
                 direction="left"
                 className="flex flex-col justify-center border-b border-white/10 bg-farm-forest/30 p-8 sm:p-10 lg:col-span-2 lg:border-b-0 lg:border-r"
               >
-                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-farm-gold">
+                <span className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-farm-gold ${mr}`}>
                   <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                  Our Location
+                  {t("contact", "locationEyebrow")}
                 </span>
-                <h3 className="mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-farm-cream sm:text-[2.25rem]">
-                  Find Us Here
+                <h3 className={`mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-farm-cream sm:text-[2.25rem] ${mr}`}>
+                  {t("contact", "locationHeading")}
                 </h3>
-                <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-farm-cream/70">
-                  Visit our office for any queries or business discussions. Our team is ready to
-                  help you find the right agricultural solutions.
+                <p className={`mt-5 max-w-sm text-[15px] leading-relaxed text-farm-cream/70 ${mr}`}>
+                  {t("contact", "locationText")}
                 </p>
               </SlideReveal>
 
@@ -516,7 +510,7 @@ export default function Contact() {
                 className="relative min-h-[320px] lg:col-span-3 lg:min-h-[420px]"
               >
                 <iframe
-                  title="Unik Biotech Research Location"
+                  title={t("contact", "mapTitle")}
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.6!2d74.09!3d20.07!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb8b6c28d1e9%3A0x0!2sPimpalgaon+Baswant%2C+Nashik!5e0!3m2!1sen!2sin!4v1000000000000!5m2!1sen!2sin"
                   className="absolute inset-0 h-full w-full"
                   style={{ border: 0 }}
@@ -529,17 +523,16 @@ export default function Contact() {
                   <p className="font-heading text-sm font-bold text-farm-ink">
                     Unik Biotech Research
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-farm-ink/65">
-                    B-178, S.S. Co-Op. Ind. Estate, Pimpalgaon (B), Tal. Niphad, Dist. Nashik -
-                    422 209, Maharashtra
+                  <p className={`mt-1 text-xs leading-relaxed text-farm-ink/65 ${mr}`}>
+                    {t("contact", "mapAddressShort")}
                   </p>
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=Pimpalgaon+Baswant+Nashik"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pointer-events-auto mt-2 inline-flex items-center gap-1 text-xs font-semibold text-farm-forest transition-colors hover:text-farm-moss"
+                    className={`pointer-events-auto mt-2 inline-flex items-center gap-1 text-xs font-semibold text-farm-forest transition-colors hover:text-farm-moss ${mr}`}
                   >
-                    View Larger Map
+                    {t("contact", "viewLargerMap")}
                     <ExternalLink className="h-3 w-3" aria-hidden="true" />
                   </a>
                 </div>

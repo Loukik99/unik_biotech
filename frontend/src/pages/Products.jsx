@@ -11,13 +11,14 @@ import SEO from "@/components/SEO";
 const HERO_IMG = "/unik/mustard-field";
 
 // Compact, editorial badge labels for the product cards (data unchanged).
-const BADGE_LABEL = {
-  micronutrient: "Micronutrient",
-  biostimulant: "Biostimulant",
-  protection: "Protection",
-  soil: "Soil Conditioner",
-  biofertilizer: "Bio Fertilizer",
-  spreader: "Spreader & Sticker",
+// Maps a product category id to its translation key in the `products` section.
+const BADGE_KEY = {
+  micronutrient: "badgeMicronutrient",
+  biostimulant: "badgeBiostimulant",
+  protection: "badgeProtection",
+  soil: "badgeSoil",
+  biofertilizer: "badgeBiofertilizer",
+  spreader: "badgeSpreader",
 };
 
 // --- Motion presets (match the homepage: fade + slide, easeOut, replay on re-entry) ---
@@ -150,6 +151,7 @@ function ProductDetailDialog({ product, open, onClose }) {
 
 export default function Products() {
   const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
   const [activeCategory, setActiveCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
@@ -304,7 +306,7 @@ export default function Products() {
               {search && (
                 <button
                   onClick={() => setSearch("")}
-                  aria-label="Clear search"
+                  aria-label={t("products", "clearSearch")}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-gray-600"
                 >
                   <X className="h-4 w-4" />
@@ -393,7 +395,7 @@ export default function Products() {
                         <span
                           className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${catColor}`}
                         >
-                          {BADGE_LABEL[product.category] || product.category}
+                          {BADGE_KEY[product.category] ? t("products", BADGE_KEY[product.category]) : product.category}
                         </span>
                       </div>
 
@@ -449,19 +451,19 @@ export default function Products() {
                 <Leaf className="h-6 w-6" strokeWidth={1.75} />
               </span>
               <div>
-                <h3 className="font-heading text-xl font-bold text-gray-900 sm:text-2xl">
-                  Can&rsquo;t find what you&rsquo;re looking for?
+                <h3 className={`font-heading text-xl font-bold text-gray-900 sm:text-2xl ${mr}`}>
+                  {t("products", "ctaTitle")}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
-                  Our team is here to help you choose the right solution for your crops.
+                <p className={`mt-1.5 text-sm leading-relaxed text-gray-500 ${mr}`}>
+                  {t("products", "ctaText")}
                 </p>
               </div>
             </div>
             <Link
               to="/contact"
-              className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-green-900/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark"
+              className={`group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-green-900/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark ${mr}`}
             >
-              Talk to Our Experts
+              {t("products", "ctaBtn")}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </Link>
           </div>

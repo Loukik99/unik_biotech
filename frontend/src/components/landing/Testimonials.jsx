@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import { Quote, Leaf, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/context/LanguageContext";
 
 // Re-animate whenever the section re-enters the viewport (scroll down or up).
 const VIEWPORT = { once: false, amount: 0.2 };
@@ -35,30 +36,10 @@ const cardVariants = {
   },
 };
 
-// Three featured farmer testimonials — reusing the crop-matched portraits that
-// already ship in /public/unik. No ratings, stats or badges by design.
-const STORIES = [
-  {
-    name: "Ramesh Patil",
-    meta: "Grapes • Nashik",
-    image: "/unik/farmer-grapes.png",
-    quote:
-      "Berry size improved noticeably after switching to AminoRich. My buyers paid premium prices for the second season in a row.",
-  },
-  {
-    name: "Sunil Deshmukh",
-    meta: "Cotton • Vidarbha",
-    image: "/unik/farmer-cotton.png",
-    quote:
-      "Rhyzomax helped my crop recover from monsoon stress. Roots were visibly thicker compared to my neighbour's plot.",
-  },
-  {
-    name: "Lakshmi Reddy",
-    meta: "Chilli • Guntur",
-    image: "/unik/farmer-chilli.png",
-    quote:
-      "Three applications of Excess and the canopy was unrecognisable. Branch count nearly doubled, and so did harvest.",
-  },
+const STORY_IMAGES = [
+  "/unik/farmer-grapes.png",
+  "/unik/farmer-cotton.png",
+  "/unik/farmer-chilli.png",
 ];
 
 /** Faint dot-grid motif tucked into a card corner. */
@@ -81,7 +62,7 @@ function CornerDots({ className }) {
   );
 }
 
-function TestimonialCard({ story, active }) {
+function TestimonialCard({ story, active, mr }) {
   return (
     <article
       className={cn(
@@ -91,9 +72,6 @@ function TestimonialCard({ story, active }) {
           : "border-farm-ink/[0.08] shadow-[0_18px_50px_-30px_rgba(27,26,22,0.35)] hover:-translate-y-1.5 hover:shadow-[0_32px_72px_-34px_rgba(27,26,22,0.42)]"
       )}
     >
-      {/* Subtle botanical corner motifs — kept very low opacity and inside the
-          card bounds so no overflow clipping is needed (clipping a shadowed,
-          rounded card while it slides is what caused shadow flicker elsewhere). */}
       <Leaf
         aria-hidden="true"
         strokeWidth={1.25}
@@ -101,18 +79,16 @@ function TestimonialCard({ story, active }) {
       />
       <CornerDots className="pointer-events-none absolute bottom-5 right-5 text-farm-forest/10" />
 
-      {/* Large quotation mark, top-left */}
       <Quote
         className="h-10 w-10 shrink-0 fill-farm-forest/15 text-farm-forest transition-transform duration-300 ease-out group-hover:scale-110"
         strokeWidth={1.5}
         aria-hidden="true"
       />
 
-      <p className="relative mt-6 text-[15px] leading-relaxed text-farm-ink/75">
+      <p className={cn("relative mt-6 text-[15px] leading-relaxed text-farm-ink/75", mr)}>
         {story.quote}
       </p>
 
-      {/* Author */}
       <div className="relative mt-auto flex items-center gap-4 border-t border-farm-ink/10 pt-6">
         <img
           src={story.image}
@@ -123,7 +99,7 @@ function TestimonialCard({ story, active }) {
         />
         <div className="min-w-0">
           <p className="font-heading text-base font-semibold text-farm-ink">{story.name}</p>
-          <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-farm-oliveDeep">
+          <p className={cn("mt-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-farm-oliveDeep", mr)}>
             {story.meta}
           </p>
         </div>
@@ -133,6 +109,13 @@ function TestimonialCard({ story, active }) {
 }
 
 export default function Testimonials() {
+  const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
+  const storiesRaw = t("landing", "stories");
+  const stories = Array.isArray(storiesRaw)
+    ? storiesRaw.map((s, i) => ({ ...s, image: STORY_IMAGES[i] }))
+    : [];
+
   // Center card highlighted by default.
   const [active, setActive] = useState(1);
   const trackRef = useRef(null);
@@ -147,8 +130,8 @@ export default function Testimonials() {
   }, []);
 
   const go = useCallback(
-    (index) => setActive((index + STORIES.length) % STORIES.length),
-    []
+    (index) => setActive((index + stories.length) % stories.length),
+    [stories.length]
   );
 
   useEffect(() => {
@@ -203,17 +186,25 @@ export default function Testimonials() {
         >
           <motion.span
             variants={headerItem}
-            className="inline-flex items-center gap-2 rounded-full border border-farm-ink/12 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-farm-oliveDeep shadow-sm"
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full border border-farm-ink/12 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-farm-oliveDeep shadow-sm",
+              mr
+            )}
           >
             <Users className="h-3.5 w-3.5" aria-hidden="true" />
-            People Testimonials
+            {t("landing", "testimonialsBadge")}
           </motion.span>
 
           <motion.h2
             variants={headerItem}
-            className="mt-6 font-heading text-[2.25rem] font-bold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]"
+            className={cn(
+              "mt-6 font-heading text-[2.25rem] font-bold leading-[1.05] tracking-[-0.02em] text-farm-ink sm:text-5xl lg:text-[3.25rem]",
+              mr
+            )}
           >
-            What Our <span className="text-farm-forest">Farmers</span> Say
+            {t("landing", "testimonialsHeadingBefore")}{" "}
+            <span className="text-farm-forest">{t("landing", "testimonialsHighlight")}</span>{" "}
+            {t("landing", "testimonialsHeadingAfter")}
           </motion.h2>
 
           {/* Leaf divider */}
@@ -229,36 +220,32 @@ export default function Testimonials() {
 
           <motion.p
             variants={headerItem}
-            className="mt-5 max-w-xl text-[15px] leading-relaxed text-farm-ink/65 sm:text-base"
+            className={cn("mt-5 max-w-xl text-[15px] leading-relaxed text-farm-ink/65 sm:text-base", mr)}
           >
-            Real experiences from farmers who trust Unik Biotech Research for better yields,
-            healthier soil, and stronger crops season after season.
+            {t("landing", "testimonialsSub")}
           </motion.p>
         </motion.div>
 
         {/* Carousel */}
         <div className="relative mt-14 lg:mt-16">
-          {/* Prev */}
           <button
             type="button"
             onClick={() => go(active - 1)}
-            aria-label="Previous testimonial"
+            aria-label={t("landing", "testimonialsPrev")}
             className="absolute left-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-farm-ink/15 bg-white text-farm-ink shadow-sm transition-[transform,background-color,color,border-color] duration-300 ease-out hover:scale-110 hover:border-farm-forest hover:bg-farm-forest hover:text-white sm:flex lg:-left-4"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          {/* Next */}
           <button
             type="button"
             onClick={() => go(active + 1)}
-            aria-label="Next testimonial"
+            aria-label={t("landing", "testimonialsNext")}
             className="absolute right-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-farm-ink/15 bg-white text-farm-ink shadow-sm transition-[transform,background-color,color,border-color] duration-300 ease-out hover:scale-110 hover:border-farm-forest hover:bg-farm-forest hover:text-white sm:flex lg:-right-4"
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          {/* Track — card wrappers stagger their directional entrance */}
           <motion.div
             ref={trackRef}
             variants={cardsContainer}
@@ -267,26 +254,25 @@ export default function Testimonials() {
             viewport={VIEWPORT}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-1 py-8 sm:px-8 lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {STORIES.map((story, index) => (
+            {stories.map((story, index) => (
               <motion.div
                 key={story.name}
                 custom={index}
                 variants={cardVariants}
                 className="w-[86%] shrink-0 snap-center sm:w-[46%] lg:w-[31.5%]"
               >
-                <TestimonialCard story={story} active={index === active} />
+                <TestimonialCard story={story} active={index === active} mr={mr} />
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Pagination dots */}
           <div className="mt-8 flex items-center justify-center gap-2.5">
-            {STORIES.map((story, index) => (
+            {stories.map((story, index) => (
               <button
                 key={story.name}
                 type="button"
                 onClick={() => setActive(index)}
-                aria-label={`Go to testimonial ${index + 1}`}
+                aria-label={`${t("landing", "testimonialsGoTo")} ${index + 1}`}
                 aria-current={index === active}
                 className={cn(
                   "h-2.5 rounded-full transition-all duration-300 ease-out",

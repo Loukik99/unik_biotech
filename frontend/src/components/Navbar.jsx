@@ -65,8 +65,8 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex h-12 items-center gap-1 group shrink-0 max-w-[220px]" data-testid="navbar-logo">
             <img
-              src="/official-logo.png"
-              alt="Unik Biotech Research Logo"
+              src="/logo2.png"
+              alt={t("nav", "logoAlt")}
               className={`h-full w-auto shrink-0 object-contain object-center transition-all duration-300 group-hover:scale-105 ${isScrolled ? "max-h-10 sm:max-h-11" : "max-h-11 sm:max-h-12"}`}
             />
             <div className="flex min-w-0 flex-col justify-center leading-none">
@@ -114,7 +114,7 @@ export default function Navbar() {
                 data-testid="lang-toggle"
                 aria-haspopup="true"
                 aria-expanded={langOpen}
-                aria-label="Change language"
+                aria-label={t("nav", "changeLanguage")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm font-semibold transition-all duration-200 ${isScrolled
                   ? "border-gray-200 text-green-800 hover:border-green-800 hover:bg-green-50"
                   : "border-white/60 text-white hover:bg-white/15"
@@ -159,7 +159,7 @@ export default function Navbar() {
               onClick={() => setOpen(!open)}
               className={`lg:hidden p-2 rounded-xl transition-colors ${isScrolled ? "text-gray-700 hover:bg-gray-100" : "text-white hover:bg-white/15"}`}
               data-testid="mobile-menu-btn"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? t("nav", "closeMenu") : t("nav", "openMenu")}
               aria-expanded={open}
             >
               {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

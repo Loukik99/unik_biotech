@@ -79,10 +79,10 @@ export default function LandingNav() {
         {/* Logo — official Unik Biotech Research lockup, transparent PNG with no wrapper
             chip so it blends into the navbar on both the dark hero and the cream
             scrolled state. */}
-        <Link to="/" className="group flex h-11 shrink-0 items-center gap-1.5 max-w-[220px]" aria-label="Unik Biotech Research — home">
+        <Link to="/" className="group flex h-11 shrink-0 items-center gap-1.5 max-w-[220px]" aria-label={t("nav", "homeAria")}>
           <img
-            src="/official-logo.png"
-            alt="Unik Biotech Research Logo"
+            src="/logo2.png"
+            alt={t("nav", "logoAlt")}
             className="h-full max-h-8 w-auto shrink-0 object-contain object-center sm:max-h-9"
             draggable="false"
           />
@@ -140,7 +140,7 @@ export default function LandingNav() {
               onClick={() => setLangOpen((v) => !v)}
               aria-haspopup="true"
               aria-expanded={langOpen}
-              aria-label="Change language"
+              aria-label={t("nav", "changeLanguage")}
               className={`flex items-center gap-1 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition-colors duration-300 ${
                 scrolled
                   ? "border-farm-ink/15 text-farm-ink/80 hover:border-farm-forest/40 hover:text-farm-forest"
@@ -183,7 +183,7 @@ export default function LandingNav() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("nav", "closeMenu") : t("nav", "openMenu")}
             aria-expanded={open}
             className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors lg:hidden ${
               scrolled ? "text-farm-ink hover:bg-farm-ink/5" : "text-farm-cream hover:bg-white/10"

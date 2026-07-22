@@ -4,45 +4,7 @@ import { Sprout, Landmark, Users, Award, ShieldCheck, Leaf } from "lucide-react"
 import { cn } from "@/lib/utils";
 import { useLang } from "@/context/LanguageContext";
 
-// Milestone content — recreated 1:1 from the reference, alternating left/right.
-const MILESTONES = [
-  {
-    icon: Sprout,
-    year: "2005",
-    title: "Founded",
-    desc: "Unik Biotech Research was established in Pimpalgaon Baswant, Nashik with a vision to serve farmers.",
-  },
-  {
-    icon: Landmark,
-    year: "2008",
-    title: "Built a Strong Foundation",
-    desc: "Strengthened manufacturing of quality agri inputs and built trust at the grassroots level.",
-  },
-  {
-    icon: Users,
-    year: "2012",
-    title: "Growing Stronger",
-    desc: "Expanded our product range and strengthened distribution across Maharashtra.",
-  },
-  {
-    icon: Award,
-    year: "2017",
-    title: "Trusted by Thousands",
-    desc: "Reached thousands of farmers and became a dependable agri partner.",
-  },
-  {
-    icon: ShieldCheck,
-    year: "2020",
-    title: "ISO Certified",
-    desc: "Achieved ISO 9001:2008 certification for our quality management systems and processes.",
-  },
-  {
-    icon: Leaf,
-    year: "2025+",
-    title: "Transforming the Future",
-    desc: "Continuing to innovate with sustainable, effective and farmer-first solutions for a better tomorrow.",
-  },
-];
+const MILESTONE_ICONS = [Sprout, Landmark, Users, Award, ShieldCheck, Leaf];
 
 // Card reveal: alternating slide + de-blur + settle. Plays once.
 const cardVariants = {
@@ -66,7 +28,7 @@ const iconVariants = {
   show: { rotate: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-function MilestoneCard({ item, dir }) {
+function MilestoneCard({ item, dir, mr }) {
   const Icon = item.icon;
   return (
     <motion.div
@@ -99,8 +61,8 @@ function MilestoneCard({ item, dir }) {
           >
             {item.year}
           </motion.div>
-          <h4 className="mt-1.5 font-heading text-lg font-bold text-brand-ink">{item.title}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-brand-muted">{item.desc}</p>
+          <h4 className={cn("mt-1.5 font-heading text-lg font-bold text-brand-ink", mr)}>{item.title}</h4>
+          <p className={cn("mt-2 text-sm leading-relaxed text-brand-muted", mr)}>{item.desc}</p>
         </div>
       </div>
     </motion.div>
@@ -150,6 +112,10 @@ export default function Milestones() {
   const { t, lang } = useLang();
   const mr = lang === "mr" ? "font-marathi" : "";
   const timelineRef = useRef(null);
+  const milestonesRaw = t("about", "milestones");
+  const MILESTONES = Array.isArray(milestonesRaw)
+    ? milestonesRaw.map((m, i) => ({ ...m, icon: MILESTONE_ICONS[i] }))
+    : [];
 
   // Line height + node activation are driven purely by scroll progress (no
   // scroll listeners) so the timeline behaves like a progress indicator.

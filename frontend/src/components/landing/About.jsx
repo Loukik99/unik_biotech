@@ -8,7 +8,8 @@ import { SlideReveal } from "@/components/animations/SlideReveal";
 import CountUp from "@/components/animations/CountUp";
 
 export default function About() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
   const journey = t("footer", "journey");
   const journeyItems = Array.isArray(journey) ? journey : [];
 
@@ -21,32 +22,29 @@ export default function About() {
             {/* Text + CTA slide in from the left (no shadow here, so the slide
                 transform is safe). */}
             <SlideReveal direction="left" className="flex flex-col">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep">
-                About Us
+              <p className={cn("text-xs font-semibold uppercase tracking-[0.28em] text-farm-oliveDeep", mr)}>
+                {t("landing", "aboutEyebrow")}
               </p>
 
-              <h2 className="mt-6 font-heading text-[2rem] font-semibold leading-[1.08] tracking-[-0.02em] text-farm-ink sm:text-4xl lg:text-[2.75rem]">
-                Growing With Farmers <span className="text-farm-forest">Since 2005</span>
+              <h2 className={cn("mt-6 font-heading text-[2rem] font-semibold leading-[1.08] tracking-[-0.02em] text-farm-ink sm:text-4xl lg:text-[2.75rem]", mr)}>
+                {t("landing", "aboutHeadingBefore")}{" "}
+                <span className="text-farm-forest">{t("landing", "aboutHighlight")}</span>
               </h2>
 
-              <p className="mt-7 max-w-xl text-[15px] leading-relaxed text-farm-ink/70 sm:text-base">
-                Founded in 2005 in Pimpalgaon Baswant, Nashik, the heart of Maharashtra&rsquo;s grape
-                and pomegranate belt, Unik Biotech Research began with a simple mission: to serve
-                farmers with quality inputs they can trust.
+              <p className={cn("mt-7 max-w-xl text-[15px] leading-relaxed text-farm-ink/70 sm:text-base", mr)}>
+                {t("landing", "aboutP1")}
               </p>
 
-              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-farm-ink/70 sm:text-base">
-                Over two decades, we have grown from a small local manufacturer into an ISO-certified
-                company with more than 100 products, proudly serving over 10,000 farmers across India
-                through research-driven agricultural solutions.
+              <p className={cn("mt-4 max-w-xl text-[15px] leading-relaxed text-farm-ink/70 sm:text-base", mr)}>
+                {t("landing", "aboutP2")}
               </p>
 
               <div className="mt-9">
                 <Link
                   to="/about"
-                  className="group inline-flex items-center gap-2 rounded-full bg-farm-forest px-6 py-3.5 text-[14px] font-semibold text-farm-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-forestDeep"
+                  className={cn("group inline-flex items-center gap-2 rounded-full bg-farm-forest px-6 py-3.5 text-[14px] font-semibold text-farm-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-farm-forestDeep", mr)}
                 >
-                  Know More About Our Milestones
+                  {t("landing", "aboutCta")}
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -87,7 +85,7 @@ export default function About() {
                 lives on this inner element (not the entrance wrapper) so the two
                 transforms never fight. */}
             <div className="relative flex h-full w-full flex-col rounded-[28px] border border-white/15 bg-farm-forest/95 p-8 shadow-glass transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_30px_70px_-28px_rgba(10,38,18,0.7)] sm:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/50">
+              <p className={cn("text-xs font-semibold uppercase tracking-[0.24em] text-white/50", mr)}>
                 {t("footer", "journeyTitle")}
               </p>
 
@@ -104,7 +102,7 @@ export default function About() {
                       value={item.value}
                       className="shrink-0 text-2xl font-bold tracking-tight text-white sm:text-3xl"
                     />
-                    <span className="text-sm text-white/60">{item.label}</span>
+                    <span className={cn("text-sm text-white/60", mr)}>{item.label}</span>
                   </div>
                 ))}
               </div>

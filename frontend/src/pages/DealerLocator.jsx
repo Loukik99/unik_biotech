@@ -49,9 +49,9 @@ const PRODUCT_INTERESTS = [
 ];
 
 const STATS = [
-  { icon: Users, value: "6+", label: "Dealers" },
-  { icon: MapPin, value: "35+", label: "Districts" },
-  { icon: ShieldCheck, value: "20+", label: "Years of Trust" },
+  { icon: Users, value: "6+", labelKey: "statsDealers" },
+  { icon: MapPin, value: "35+", labelKey: "statsDistricts" },
+  { icon: ShieldCheck, value: "20+", labelKey: "statsYears" },
 ];
 
 const DEALERS = [
@@ -143,7 +143,10 @@ const scrollToId = (id) => {
 };
 
 export default function DealerLocator() {
-  const { lang } = useLang();
+  const { t, tArr, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
+  const experienceLabels = tArr("dealer", "experienceOptions");
+  const productLabels = tArr("dealer", "productInterests");
   const [form, setForm] = useState({
     name: "",
     firm: "",
@@ -169,11 +172,11 @@ export default function DealerLocator() {
   const handleDealerSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.city || !form.district) {
-      toast.error("Please fill in your name, mobile number, city and district.");
+      toast.error(t("dealer", "applyErrFill"));
       return;
     }
     if (!form.agree) {
-      toast.error("Please agree to be contacted by Unik Biotech Research.");
+      toast.error(t("dealer", "applyErrAgree"));
       return;
     }
     setLoading(true);
@@ -193,17 +196,17 @@ export default function DealerLocator() {
       });
 
       if (response.ok) {
-        toast.success("Application submitted! Our team will contact you within 24 hours.");
+        toast.success(t("dealer", "applySuccess"));
         setForm({
           name: "", firm: "", phone: "", email: "", city: "", district: "",
           state: "", pincode: "", experience: "", products: "",
           existingCustomer: "yes", message: "", agree: false,
         });
       } else {
-        toast.error("Something went wrong. Please try again.");
+        toast.error(t("dealer", "applyErrSub"));
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t("dealer", "applyErrSub"));
     } finally {
       setLoading(false);
     }
@@ -291,34 +294,33 @@ export default function DealerLocator() {
           >
             <motion.h1
               variants={heroItem}
-              className="font-heading text-5xl font-bold leading-[0.98] tracking-[-0.02em] text-farm-cream sm:text-6xl lg:text-[4.25rem]"
+              className={`font-heading text-5xl font-bold leading-[0.98] tracking-[-0.02em] text-farm-cream sm:text-6xl lg:text-[4.25rem] ${mr}`}
             >
-              Together, Let&rsquo;s
+              {t("dealer", "heroHeadingBefore")}
               <br />
-              <span className="text-brand-greenAccent">Grow</span> Better
+              <span className="text-brand-greenAccent">{t("dealer", "heroHighlight")}</span> {t("dealer", "heroHeadingAfter")}
             </motion.h1>
             <motion.p
               variants={heroItem}
-              className="mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/80 sm:text-base"
+              className={`mt-6 max-w-xl text-[15px] leading-relaxed text-farm-cream/80 sm:text-base ${mr}`}
             >
-              Join the Unik Biotech Research dealer network and be a part of our mission to
-              empower farmers and build a stronger agricultural future.
+              {t("dealer", "sub")}
             </motion.p>
             <motion.div variants={heroItem} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={() => scrollToId("apply")}
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand-green px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-black/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark"
+                className={`group inline-flex items-center justify-center gap-2 rounded-full bg-brand-green px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-black/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark ${mr}`}
               >
-                Become a Dealer
+                {t("dealer", "becomeTitle")}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
               </button>
               <button
                 type="button"
                 onClick={() => scrollToId("dealers")}
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-white/12"
+                className={`group inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-white/12 ${mr}`}
               >
-                Find a Dealer
+                {t("dealer", "findTitle")}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
               </button>
             </motion.div>
@@ -335,9 +337,9 @@ export default function DealerLocator() {
           viewport={VIEWPORT}
           className="grid grid-cols-1 gap-2 rounded-[24px] border border-gray-100 bg-white p-6 shadow-[0_30px_70px_-30px_rgba(16,20,24,0.35)] sm:grid-cols-3 sm:p-8"
         >
-          {STATS.map(({ icon: Icon, value, label }, i) => (
+          {STATS.map(({ icon: Icon, value, labelKey }, i) => (
             <div
-              key={label}
+              key={labelKey}
               className={`flex items-center justify-center gap-4 py-3 sm:flex-col sm:gap-3 sm:py-0 ${
                 i < STATS.length - 1 ? "sm:border-r sm:border-gray-100" : ""
               }`}
@@ -350,7 +352,7 @@ export default function DealerLocator() {
                   value={value}
                   className="font-heading text-3xl font-extrabold text-gray-900 sm:text-4xl"
                 />
-                <p className="mt-0.5 text-sm font-medium text-gray-500">{label}</p>
+                <p className={`mt-0.5 text-sm font-medium text-gray-500 ${mr}`}>{t("dealer", labelKey)}</p>
               </div>
             </div>
           ))}
@@ -368,17 +370,16 @@ export default function DealerLocator() {
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-50 text-brand-green">
               <Handshake className="h-7 w-7" strokeWidth={1.75} />
             </span>
-            <h3 className="mt-5 font-heading text-2xl font-bold text-gray-900">Become a Dealer</h3>
-            <p className="mt-3 text-sm leading-relaxed text-gray-500">
-              Partner with Unik Biotech Research and grow your business with our trusted products,
-              support and guidance.
+            <h3 className={`mt-5 font-heading text-2xl font-bold text-gray-900 ${mr}`}>{t("dealer", "becomeTitle")}</h3>
+            <p className={`mt-3 text-sm leading-relaxed text-gray-500 ${mr}`}>
+              {t("dealer", "becomeSub")}
             </p>
             <button
               type="button"
               onClick={() => scrollToId("apply")}
-              className="group mt-6 inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 text-sm font-semibold text-white shadow-md shadow-green-900/20 transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark"
+              className={`group mt-6 inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 text-sm font-semibold text-white shadow-md shadow-green-900/20 transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark ${mr}`}
             >
-              Apply Now
+              {t("dealer", "applyNow")}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </button>
           </SlideReveal>
@@ -391,16 +392,16 @@ export default function DealerLocator() {
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600">
               <Store className="h-7 w-7" strokeWidth={1.75} />
             </span>
-            <h3 className="mt-5 font-heading text-2xl font-bold text-gray-900">Find a Dealer</h3>
-            <p className="mt-3 text-sm leading-relaxed text-gray-500">
-              Locate your nearest authorized dealer and get genuine products with expert advice.
+            <h3 className={`mt-5 font-heading text-2xl font-bold text-gray-900 ${mr}`}>{t("dealer", "findTitle")}</h3>
+            <p className={`mt-3 text-sm leading-relaxed text-gray-500 ${mr}`}>
+              {t("dealer", "findSub")}
             </p>
             <button
               type="button"
               onClick={() => scrollToId("dealers")}
-              className="group mt-6 inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-black/20 transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-gray-800"
+              className={`group mt-6 inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-black/20 transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-gray-800 ${mr}`}
             >
-              Find a Dealer
+              {t("dealer", "findTitle")}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </button>
           </SlideReveal>
@@ -418,17 +419,15 @@ export default function DealerLocator() {
               className="relative flex flex-col justify-between overflow-hidden border-b border-green-100/70 bg-gradient-to-br from-green-50 to-[#f2f7ee] p-8 sm:p-10 lg:col-span-2 lg:border-b-0 lg:border-r"
             >
               <div className="relative z-10">
-                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-green">
+                <span className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-green ${mr}`}>
                   <Sprout className="h-3.5 w-3.5" />
-                  Become a Dealer
+                  {t("dealer", "formEyebrow")}
                 </span>
-                <h2 className="mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-gray-900 sm:text-[2.25rem]">
-                  Join Our Dealer Network
+                <h2 className={`mt-5 font-heading text-3xl font-bold leading-[1.1] tracking-[-0.01em] text-gray-900 sm:text-[2.25rem] ${mr}`}>
+                  {t("dealer", "formHeading")}
                 </h2>
-                <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-gray-500">
-                  Partner with Unik Biotech Research and grow your business with trusted
-                  agricultural solutions, technical support, and a strong dealer network across
-                  India.
+                <p className={`mt-5 max-w-sm text-[15px] leading-relaxed text-gray-500 ${mr}`}>
+                  {t("dealer", "formIntro")}
                 </p>
               </div>
 
@@ -459,67 +458,67 @@ export default function DealerLocator() {
                 data-testid="dealer-apply-form"
               >
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Full Name <span className="text-red-500">*</span></label>
-                  <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your full name" data-testid="dealer-name" className={inputBase} />
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "applyName")} <span className="text-red-500">*</span></label>
+                  <input type="text" name="name" value={form.name} onChange={handleChange} placeholder={t("dealer", "namePlaceholder")} data-testid="dealer-name" className={inputBase} />
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Business / Firm Name <span className="text-red-500">*</span></label>
-                  <input type="text" name="firm" value={form.firm} onChange={handleChange} placeholder="Your business name" className={inputBase} />
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "firmLabel")} <span className="text-red-500">*</span></label>
+                  <input type="text" name="firm" value={form.firm} onChange={handleChange} placeholder={t("dealer", "firmPlaceholder")} className={inputBase} />
                 </motion.div>
 
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Mobile Number <span className="text-red-500">*</span></label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "mobileLabel")} <span className="text-red-500">*</span></label>
                   <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" data-testid="dealer-phone" className={inputBase} />
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Email Address</label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "emailLabel")}</label>
                   <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="your@email.com" className={inputBase} />
                 </motion.div>
 
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>City <span className="text-red-500">*</span></label>
-                  <input type="text" name="city" value={form.city} onChange={handleChange} placeholder="Your city" className={inputBase} />
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "cityLabel")} <span className="text-red-500">*</span></label>
+                  <input type="text" name="city" value={form.city} onChange={handleChange} placeholder={t("dealer", "cityPlaceholder")} className={inputBase} />
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>District <span className="text-red-500">*</span></label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "applyDistrict")} <span className="text-red-500">*</span></label>
                   <select name="district" value={form.district} onChange={handleChange} data-testid="dealer-district" className={selectBase}>
-                    <option value="">Select district</option>
+                    <option value="">{t("dealer", "selectDistrict")}</option>
                     {DISTRICTS.map((d) => <option key={d} value={d}>{d}</option>)}
                   </select>
                 </motion.div>
 
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>State</label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "stateLabel")}</label>
                   <select name="state" value={form.state} onChange={handleChange} className={selectBase}>
-                    <option value="">Select state</option>
+                    <option value="">{t("dealer", "selectState")}</option>
                     {STATES.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Pin Code</label>
-                  <input type="text" name="pincode" value={form.pincode} onChange={handleChange} placeholder="e.g. 422209" className={inputBase} />
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "pinLabel")}</label>
+                  <input type="text" name="pincode" value={form.pincode} onChange={handleChange} placeholder={t("dealer", "pinPlaceholder")} className={inputBase} />
                 </motion.div>
 
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Years in Agricultural Business <span className="text-red-500">*</span></label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "experienceLabel")} <span className="text-red-500">*</span></label>
                   <select name="experience" value={form.experience} onChange={handleChange} className={selectBase}>
-                    <option value="">Select Experience</option>
-                    {EXPERIENCE.map((x) => <option key={x} value={x}>{x}</option>)}
+                    <option value="">{t("dealer", "selectExperience")}</option>
+                    {EXPERIENCE.map((x, i) => <option key={x} value={x}>{experienceLabels[i] || x}</option>)}
                   </select>
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Products Interested In <span className="text-red-500">*</span></label>
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "productsLabel")} <span className="text-red-500">*</span></label>
                   <select name="products" value={form.products} onChange={handleChange} className={selectBase}>
-                    <option value="">Select Products</option>
-                    {PRODUCT_INTERESTS.map((p) => <option key={p} value={p}>{p}</option>)}
+                    <option value="">{t("dealer", "selectProducts")}</option>
+                    {PRODUCT_INTERESTS.map((p, i) => <option key={p} value={p}>{productLabels[i] || p}</option>)}
                   </select>
                 </motion.div>
 
                 <motion.div variants={fieldItem}>
-                  <span className={labelBase}>Existing Customer? <span className="text-red-500">*</span></span>
+                  <span className={`${labelBase} ${mr}`}>{t("dealer", "existingCustomer")} <span className="text-red-500">*</span></span>
                   <div className="flex items-center gap-6 pt-1.5">
                     {["yes", "no"].map((v) => (
-                      <label key={v} className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-700">
+                      <label key={v} className={`inline-flex cursor-pointer items-center gap-2 text-sm text-gray-700 ${mr}`}>
                         <input
                           type="radio"
                           name="existingCustomer"
@@ -528,14 +527,14 @@ export default function DealerLocator() {
                           onChange={handleChange}
                           className="h-4 w-4 accent-brand-green"
                         />
-                        {v === "yes" ? "Yes" : "No"}
+                        {v === "yes" ? t("common", "yes") : t("common", "no")}
                       </label>
                     ))}
                   </div>
                 </motion.div>
                 <motion.div variants={fieldItem}>
-                  <label className={labelBase}>Additional Message</label>
-                  <input type="text" name="message" value={form.message} onChange={handleChange} placeholder="Write your message here..." className={inputBase} />
+                  <label className={`${labelBase} ${mr}`}>{t("dealer", "messageLabel")}</label>
+                  <input type="text" name="message" value={form.message} onChange={handleChange} placeholder={t("dealer", "messagePlaceholder")} className={inputBase} />
                 </motion.div>
 
                 <motion.label variants={fieldItem} className="flex cursor-pointer items-start gap-3 sm:col-span-2">
@@ -546,8 +545,8 @@ export default function DealerLocator() {
                     onChange={handleChange}
                     className="mt-0.5 h-4 w-4 rounded accent-brand-green"
                   />
-                  <span className="text-sm text-gray-500">
-                    I agree to be contacted by Unik Biotech Research.
+                  <span className={`text-sm text-gray-500 ${mr}`}>
+                    {t("dealer", "agreeText")}
                   </span>
                 </motion.label>
 
@@ -559,7 +558,7 @@ export default function DealerLocator() {
                     className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-green px-8 py-4 text-[15px] font-semibold text-white shadow-lg shadow-green-900/25 transition-[transform,background-color,box-shadow] duration-300 ease-out hover:scale-[1.02] hover:bg-brand-greenDark hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 sm:w-auto"
                   >
                     <Send className="h-4 w-4" />
-                    <span>{loading ? "Submitting..." : "Apply to Become a Dealer"}</span>
+                    <span className={mr}>{loading ? t("dealer", "applyBtnSubmitting") : t("dealer", "applySubmit")}</span>
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                   </button>
                 </motion.div>
@@ -582,10 +581,10 @@ export default function DealerLocator() {
             <Headphones className="h-6 w-6" />
           </span>
           <div>
-            <h3 className="font-heading text-lg font-bold text-white">
-              We respond within <span className="text-amber-300">24 hours</span>
+            <h3 className={`font-heading text-lg font-bold text-white ${mr}`}>
+              {t("dealer", "respondTitleBefore")} <span className="text-amber-300">{t("dealer", "respondHighlight")}</span>
             </h3>
-            <p className="text-sm text-green-100/80">Our team will connect with you shortly.</p>
+            <p className={`text-sm text-green-100/80 ${mr}`}>{t("dealer", "respondSub")}</p>
           </div>
         </motion.div>
       </section>
@@ -600,20 +599,19 @@ export default function DealerLocator() {
           className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-green">
+            <div className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-green ${mr}`}>
               <Sprout className="h-3.5 w-3.5" />
-              Our Network
+              {t("dealer", "availableEyebrow")}
             </div>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Available Dealers
+            <h2 className={`mt-3 font-heading text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ${mr}`}>
+              {t("dealer", "availableTitle")}
             </h2>
-            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-gray-500">
-              Connect with your nearest authorized Unik Biotech Research dealer for genuine
-              products, expert guidance and reliable agricultural solutions.
+            <p className={`mt-3 max-w-xl text-[15px] leading-relaxed text-gray-500 ${mr}`}>
+              {t("dealer", "availableSub")}
             </p>
           </div>
-          <p className="shrink-0 text-sm text-gray-500">
-            Showing <span className="font-bold text-gray-900">{DEALERS.length} Dealers</span>
+          <p className={`shrink-0 text-sm text-gray-500 ${mr}`}>
+            {t("dealer", "showing")} <span className="font-bold text-gray-900">{DEALERS.length} {t("dealer", "dealersCount")}</span>
           </p>
         </motion.div>
 
@@ -631,9 +629,9 @@ export default function DealerLocator() {
               custom={i}
               className="group flex h-full flex-col rounded-[24px] border border-gray-100 bg-white p-6 shadow-soft transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-green-200 hover:shadow-[0_34px_70px_-30px_rgba(16,20,24,0.4)]"
             >
-              <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-[11px] font-semibold text-green-800">
+              <span className={`inline-flex w-fit items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-[11px] font-semibold text-green-800 ${mr}`}>
                 <BadgeCheck className="h-3.5 w-3.5" />
-                Authorized Dealer
+                {t("dealer", "authorizedBadge")}
               </span>
 
               <h3 className="mt-4 font-heading text-lg font-bold text-gray-900">{d.name}</h3>
@@ -659,8 +657,8 @@ export default function DealerLocator() {
               </div>
 
               <div className="mt-4">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
-                  Available Products
+                <p className={`mb-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 ${mr}`}>
+                  {t("dealer", "availableProducts")}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {d.products.map((p) => (
@@ -677,7 +675,7 @@ export default function DealerLocator() {
                   className="group/btn inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand-green px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-[transform,background-color] duration-300 ease-out hover:scale-[1.03] hover:bg-brand-greenDark"
                 >
                   <Phone className="h-4 w-4" />
-                  Call Dealer
+                  <span className={mr}>{t("dealer", "callDealer")}</span>
                 </a>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.address)}`}
@@ -686,7 +684,7 @@ export default function DealerLocator() {
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-700 transition-[transform,border-color,color] duration-300 ease-out hover:scale-[1.03] hover:border-brand-green hover:text-brand-green"
                 >
                   <Navigation className="h-4 w-4" />
-                  Directions
+                  <span className={mr}>{t("dealer", "directions")}</span>
                 </a>
               </div>
             </motion.article>

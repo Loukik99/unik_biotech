@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { SlideReveal } from "@/components/animations/SlideReveal";
+import { useLang } from "@/context/LanguageContext";
 
 const PHONE_DISPLAY = "+91 7666272741";
 const PHONE_TEL = "+917666272741";
@@ -18,9 +19,11 @@ function WhatsAppIcon({ className }) {
 // dark footer. It reuses the site's frosted-glass panel language (see Footer)
 // on the deep-forest palette so it feels native to the rest of the homepage.
 export default function CallToAction() {
+  const { t, lang } = useLang();
+  const mr = lang === "mr" ? "font-marathi" : "";
+
   return (
     <section className="relative w-full overflow-hidden bg-farm-forestDeep py-24 sm:py-28 lg:py-32">
-      {/* Soft colour blooms give the frosted panel something to refract. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-farm-moss/40 blur-3xl"
@@ -36,18 +39,16 @@ export default function CallToAction() {
 
       <div className="relative mx-auto max-w-4xl px-5 sm:px-6">
         <SlideReveal direction="right" className="relative overflow-hidden rounded-[32px] border border-white/15 bg-white/[0.08] px-8 py-14 text-center shadow-glass backdrop-blur-2xl sm:rounded-[40px] sm:px-12 lg:px-16 lg:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-farm-gold">
-            Grow With Unik Biotech Research
+          <p className={`text-xs font-semibold uppercase tracking-[0.28em] text-farm-gold ${mr}`}>
+            {t("landing", "ctaEyebrow")}
           </p>
 
-          <h2 className="mx-auto mt-6 max-w-2xl font-heading text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-farm-cream sm:text-4xl lg:text-[2.75rem]">
-            Ready to grow healthier crops and better yields?
+          <h2 className={`mx-auto mt-6 max-w-2xl font-heading text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-farm-cream sm:text-4xl lg:text-[2.75rem] ${mr}`}>
+            {t("landing", "ctaHeading")}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/75 sm:text-base">
-            Partner with our agronomists to find the right inputs for your soil,
-            season and crop, backed by trusted quality and dependable on-ground
-            support.
+          <p className={`mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/75 sm:text-base ${mr}`}>
+            {t("landing", "ctaText")}
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -63,10 +64,10 @@ export default function CallToAction() {
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-8 py-4 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-[transform,box-shadow,background-color] duration-300 ease-out hover:-translate-y-[3px] hover:scale-[1.02] hover:bg-white/12 hover:shadow-xl hover:shadow-black/20"
+              className={`group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-8 py-4 text-[15px] font-semibold text-farm-cream backdrop-blur-md transition-[transform,box-shadow,background-color] duration-300 ease-out hover:-translate-y-[3px] hover:scale-[1.02] hover:bg-white/12 hover:shadow-xl hover:shadow-black/20 ${mr}`}
             >
               <WhatsAppIcon className="h-5 w-5 transition-transform duration-300 ease-out group-hover:scale-110" />
-              Chat on WhatsApp
+              {t("landing", "ctaWhatsapp")}
             </a>
           </div>
         </SlideReveal>
