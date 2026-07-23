@@ -55,7 +55,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-farm-forestDeep">
+    <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-farm-forestDeep">
       {/* Cinematic crossfading + Ken Burns background */}
       <div className="absolute inset-0">
         {SLIDES.map((slide, i) => {

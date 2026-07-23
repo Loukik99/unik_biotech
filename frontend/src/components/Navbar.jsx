@@ -69,18 +69,6 @@ export default function Navbar() {
               alt={t("nav", "logoAlt")}
               className={`h-full w-auto shrink-0 object-contain object-center transition-all duration-300 group-hover:scale-105 ${isScrolled ? "max-h-10 sm:max-h-11" : "max-h-11 sm:max-h-12"}`}
             />
-            <div className="flex min-w-0 flex-col justify-center leading-none">
-              <span
-                className={`whitespace-nowrap text-xs font-semibold transition-colors duration-300 sm:text-[13px] ${isScrolled ? "text-gray-800" : "text-white"}`}
-              >
-                Unik Biotech
-              </span>
-              <span
-                className={`whitespace-nowrap text-[10px] font-normal transition-colors duration-300 sm:text-[11px] ${isScrolled ? "text-gray-500" : "text-white/65"}`}
-              >
-                Research
-              </span>
-            </div>
           </Link>
 
           {/* Desktop nav */}
